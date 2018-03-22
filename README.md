@@ -1,1 +1,1 @@
-Projet Allegro en C -- 1ère année, 2nd semestre ECE PARIS
+﻿Projet Allegro 4.4.2 - Language C - 1ère année ECE Paris Ecole d'ingénieur - 2nd Semestre
