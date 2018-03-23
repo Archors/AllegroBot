@@ -1,8 +1,9 @@
+#include <stdlib.h>
+#include <stdio.h>
 #include <allegro.h>
 
 int main()
 {
-    int r=255,g=255,b=0;
     allegro_init();
     install_mouse();
     BITMAP *tampon=create_bitmap(800,600);
