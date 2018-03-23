@@ -15,7 +15,7 @@ int main()
         allegro_exit();
         exit(EXIT_FAILURE);
     }
-
+    printf("Salut");
     while (!key[KEY_ESC])
     {
         clear_bitmap(tampon);
