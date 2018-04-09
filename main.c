@@ -6,23 +6,22 @@ int main()
 {
     allegro_init();
     install_mouse();
-    BITMAP *tampon=create_bitmap(800,600);
+    BITMAP *tampon=create_bitmap(1280,720);
     install_keyboard();
     set_color_depth(desktop_color_depth());
-    if (set_gfx_mode(GFX_AUTODETECT_WINDOWED,800,600,0,0)!=0)
+    if (set_gfx_mode(GFX_AUTODETECT,1280,720,0,0)!=0)
     {
         allegro_message("prb gfx mode");
         allegro_exit();
         exit(EXIT_FAILURE);
     }
-    printf("Salut");
     while (!key[KEY_ESC])
     {
         clear_bitmap(tampon);
         circlefill(tampon,mouse_x,mouse_y,20,makecol(255,127,127));
-        blit(tampon,screen,0,0,0,0,800,600);
-    }
 
+        blit(tampon,screen,0,0,0,0,1280,720);
+    }
     return 0;
 }
 END_OF_MAIN();
