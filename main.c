@@ -1,23 +1,17 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <allegro.h>
-#include <time.h>
-
-void MapCreation(int **tab, int taillex, int tailley,BITMAP *tampon, BITMAP *sol,BITMAP *tolight, BITMAP *light);
-void decoupage(BITMAP *base, BITMAP ***decoupe);
+#include "Prototype.h"
 
 int main()
 {
     allegro_init();
     install_mouse();
-    int i=0,j=0;
+    install_keyboard();
+    int i=0,j=0,k=0;
     BITMAP *tampon;
     BITMAP *personnage;
     BITMAP *sol;
     BITMAP *tolight;
     BITMAP *light;
-    BITMAP ***decoupe;
-    install_keyboard();
+    t_personnage *bot;
     set_color_depth(desktop_color_depth());
     if (set_gfx_mode(GFX_AUTODETECT,1280,720,0,0)!=0)
     {
@@ -43,21 +37,25 @@ int main()
     tolight=load_bitmap("Image/Tolight.bmp",NULL);
     light=load_bitmap("Image/Light.bmp",NULL);
 
-    ///Creation d'un tableau de BITMAP a 2 dimensions
-    decoupe=malloc(4*sizeof(BITMAP**));
-    for(i=0; i<9; i++)
-        decoupe[i]=malloc(9*sizeof(BITMAP*));
-    for(j=0; j<4; j++)
-        for(i=0; i<9; i++)
-            decoupe[j][i]=create_bitmap(personnage->w/9,personnage->h/8);
-    decoupage(personnage,decoupe);
+    bot = calloc(5,sizeof(t_personnage)); ///5 bots
+    for(k=0; k<5; k++) ///On parcourt les 5 bots
+    {
+        bot[k].sprite=malloc(4*sizeof(BITMAP**)); ///4 possibilites de deplacement
+        for(i=0; i<4; i++)
+            bot[k].sprite[i]=malloc(9*sizeof(BITMAP*)); ///9 sprite par deplacement
+        for(j=0; j<4; j++)
+            for(i=0; i<9; i++)
+                bot[k].sprite[j][i]=create_bitmap(personnage->w/9,personnage->h/8);
+
+    }
+    decoupage(personnage,bot[0].sprite);
     i=8;
     while (!key[KEY_ESC])
     {
         clear_bitmap(tampon);
         MapCreation(map,5,5,tampon,sol,tolight,light);
         //masked_blit(personnage,tampon,0,0,0,0,personnage->w,personnage->h);
-        masked_blit(decoupe[3][i],tampon,0,0,mouse_x,mouse_y,decoupe[3][5]->w,decoupe[3][5]->h);
+        masked_blit(bot[0].sprite[3][i],tampon,0,0,mouse_x,mouse_y,bot[0].sprite[3][5]->w,bot[0].sprite[3][5]->h);
         i--;
         if(i<0)
             i=8;
@@ -66,45 +64,7 @@ int main()
         //masked_blit(personnage,tampon,0,0,mouse_x,mouse_y,60,70);
         blit(tampon,screen,0,0,0,0,1280,720);
     }
+    liberer(map,bot);
     return 0;
 }
 END_OF_MAIN();
-
-///Recois un tableau et affiche ce dernier
-void MapCreation(int **tab, int taillex, int tailley,BITMAP *tampon, BITMAP *sol, BITMAP *tolight,BITMAP *light)
-{
-    int i=0,j=0; ///Parcourt du tableau de la map
-    int x,y; ///Position cartesienne de depart
-    int isox,isoy; ///Variable de conversion de cartesion à 2D isometrique
-
-    ///Parcours du tableau
-    for(i=0; i<taillex; i++)
-    {
-        for(j=0; j<tailley; j++)
-        {
-            x=j*74;
-            y=i*74;
-            isox=x-y;
-            isoy=(x+y)/2;
-            if(tab[i][j] == 0) {}
-            if(tab[i][j] == 1)
-                masked_blit(sol,tampon,0,0,isox+400,isoy+100,sol->w,sol->h);
-            if(tab[i][j] == 2)
-                masked_blit(tolight,tampon,0,0,isox+400,isoy+100,tolight->w,tolight->h);
-            if(tab[i][j] == 3)
-                masked_blit(light,tampon,0,0,isox+400,isoy+100,light->w,light->h);
-        }
-    }
-}
-
-///Recois des sprites sur 1 image et decoupe en plein d'images
-void decoupage(BITMAP *base, BITMAP ***decoupe)
-{
-    int i;
-    for(i=0; i<9; i++){
-        blit(base,decoupe[0][i],(base->w/9)*i,(base->h)/8*0,0,0,decoupe[0][i]->w,decoupe[0][i]->h);
-        blit(base,decoupe[1][i],(base->w/9)*i,(base->h)/8*2,0,0,decoupe[1][i]->w,decoupe[1][i]->h);
-        blit(base,decoupe[2][i],(base->w/9)*i,(base->h)/8*5,0,0,decoupe[2][i]->w,decoupe[2][i]->h);
-        blit(base,decoupe[3][i],(base->w/9)*i,(base->h)/8*7,0,0,decoupe[3][i]->w,decoupe[3][i]->h);
-    }
-}
