@@ -1,6 +1,7 @@
 # depslib dependency file v1.0
-1523362124 source:c:\users\antoine\desktop\gitproject\projetallegro\main.c
-	<stdlib.h>
+1523799869 source:c:\users\antoine\desktop\gitproject\projetallegro\main.c
 	<stdio.h>
+	<stdlib.h>
 	<allegro.h>
+	<time.h>
 
