@@ -1,16 +1,16 @@
 # depslib dependency file v1.0
-1523817658 source:c:\users\antoine\desktop\gitproject\projetallegro\main.c
+1523900027 source:c:\users\antoine\desktop\gitproject\projetallegro\main.c
 	"Prototype.h"
 
-1523815696 c:\users\antoine\desktop\gitproject\projetallegro\prototype.h
+1523900261 c:\users\antoine\desktop\gitproject\projetallegro\prototype.h
 	<stdio.h>
 	<stdlib.h>
 	<allegro.h>
 	<time.h>
 
-1523817380 source:c:\users\antoine\desktop\gitproject\projetallegro\affichage.c
+1523898182 source:c:\users\antoine\desktop\gitproject\projetallegro\affichage.c
 	"Prototype.h"
 
-1523817720 source:c:\users\antoine\desktop\gitproject\projetallegro\initfree.c
+1523900196 source:c:\users\antoine\desktop\gitproject\projetallegro\initfree.c
 	"Prototype.h"
 

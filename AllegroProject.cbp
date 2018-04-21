@@ -34,6 +34,13 @@
 		<Linker>
 			<Add library="alleg44.dll" />
 		</Linker>
+		<Unit filename="Affichage.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="InitFree.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Prototype.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>

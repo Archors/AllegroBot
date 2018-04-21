@@ -2,32 +2,23 @@
 
 int main()
 {
-    allegro_init();
-    install_mouse();
-    install_keyboard();
+    initalleg();
     int i=0,j=0,k=0;
+    int decalx,decaly;
+    int taillex=10, tailley=10;
     BITMAP *tampon;
     BITMAP *personnage;
     BITMAP *sol;
     BITMAP *tolight;
     BITMAP *light;
     t_personnage *bot;
-    set_color_depth(desktop_color_depth());
-    if (set_gfx_mode(GFX_AUTODETECT,1280,720,0,0)!=0)
-    {
-        allegro_message("prb gfx mode");
-        allegro_exit();
-        exit(EXIT_FAILURE);
-    }
-
     int **map;
-    map=malloc(10*sizeof(int*));
-    for(i=0; i<10; i++)
-        map[i]=malloc(10*sizeof(int));
-    for(i=0; i<10; i++)
-        for(j=0; j<10; j++)
+    map=malloc(tailley*sizeof(int*));
+    for(i=0; i<tailley; i++)
+        map[i]=malloc(taillex*sizeof(int));
+    for(i=0; i<tailley; i++)
+        for(j=0; j<taillex; j++)
             map[i][j]=1;
-
     map[4][4]=2;
     map[3][4]=3;
     map[3][3]=0;
@@ -46,20 +37,20 @@ int main()
         for(j=0; j<4; j++)
             for(i=0; i<9; i++)
                 bot[k].sprite[j][i]=create_bitmap(personnage->w/9,personnage->h/8);
-
     }
     decoupage(personnage,bot[0].sprite);
     i=8;
     while (!key[KEY_ESC])
     {
         clear_bitmap(tampon);
-        MapCreation(map,5,5,tampon,sol,tolight,light);
-        //masked_blit(personnage,tampon,0,0,0,0,personnage->w,personnage->h);
-        masked_blit(bot[0].sprite[3][i],tampon,0,0,mouse_x,mouse_y,bot[0].sprite[3][5]->w,bot[0].sprite[3][5]->h);
+        decalage(taillex,tailley,&decalx,&decaly);
+        MapCreation(map,taillex,tailley,decalx,decaly,tampon,sol,tolight,light);
+        //masked_blit(bot[0].sprite[3][i],tampon,0,0,mouse_x,mouse_y,bot[0].sprite[3][5]->w,bot[0].sprite[3][5]->h);
+        //draw_sprite(tampon,bot[0].sprite[3][i],(bot[0].x-bot[0].y)+decalx)*3,(isoy+decaly)*3);
         i--;
         if(i<0)
             i=8;
-        rest(100);
+        rest(50);
         //circlefill(tampon,mouse_x,mouse_y,20,makecol(255,127,127));
         //masked_blit(personnage,tampon,0,0,mouse_x,mouse_y,60,70);
         blit(tampon,screen,0,0,0,0,1280,720);
