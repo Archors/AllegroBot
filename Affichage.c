@@ -49,3 +49,25 @@ void decoupage(BITMAP *base, BITMAP ***decoupe)
         blit(base,decoupe[3][i],(base->w/9)*i,(base->h)/8*7,0,0,decoupe[3][i]->w,decoupe[3][i]->h);
     }
 }
+
+int toisox(int x, int y)
+{
+    return(x*74-y*74);
+}
+
+int toisoy(int x, int y)
+{
+    return((x*74+y*74)/2);
+}
+
+void deplacement(t_personnage *bot, int vitesse)
+{
+    int i=0;
+    bot[i].isox += (bot[i].dirisox - bot[i].isox) * vitesse / (sqrt((bot[i].isox - bot[i].dirisox)*(bot[i].isox - bot[i].dirisox) + (bot[i].isoy - bot[i].dirisoy)*(bot[i].isoy - bot[i].dirisoy)));
+    bot[i].isoy += (bot[i].dirisoy - bot[i].isoy) * vitesse / (sqrt((bot[i].isox - bot[i].dirisox)*(bot[i].isox - bot[i].dirisox) + (bot[i].isoy - bot[i].dirisoy)*(bot[i].isoy - bot[i].dirisoy)));
+    if(bot[i].isox < 10+bot[i].dirisox && bot[i].isoy < 10+bot[i].dirisoy  && bot[i].isox > bot[i].dirisox-10 && bot[i].isoy > bot[i].dirisoy-10)
+    {
+        bot[i].isox=bot[i].dirisox;
+        bot[i].isoy=bot[i].dirisoy;
+    }
+}
