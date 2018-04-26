@@ -41,6 +41,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Prototype.h" />
+		<Unit filename="dragdrop.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>

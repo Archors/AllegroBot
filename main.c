@@ -4,6 +4,8 @@ int main()
 {
     initalleg();
     int vitesse=5;
+    int clique=0;
+    int mem;
     int i=0,j=0,k=0;
     int taillex=5, tailley=5;
     int action[5]= {1,2,3,4,5};
@@ -94,11 +96,40 @@ int main()
                 draw_sprite(tampon,rotateright,150+j*100,600);
             else if(action[j] == 5)
                 draw_sprite(tampon,spring,150+j*100,600);
+            if(mouse_b&1 && (mouse_x>150+j*100 && mouse_x < 150+(j+1)*100) && mouse_y > 600 && mouse_y < 700 )
+            {
+                if(action[j] != 0)
+                {
+                    clique=1;
+                    mem=action[j];
+                }
+            }
         }
-        circlefill(tampon,mouse_x,mouse_y,20,makecol(255,127,127));
+        if(clique == 1){
+        if(mem == 1)
+            draw_sprite(tampon,actionforward,mouse_x-50,mouse_y-50);
+        if(mem == 2)
+            draw_sprite(tampon,actionlight,mouse_x-50,mouse_y-50);
+        if(mem == 3)
+            draw_sprite(tampon,rotateleft,mouse_x-50,mouse_y-50);
+        if(mem == 4)
+            draw_sprite(tampon,rotateright,mouse_x-50,mouse_y-50);
+        if(mem == 5)
+            draw_sprite(tampon,spring,mouse_x-50,mouse_y-50);
+
+
+        }
+        if(!mouse_b&1)
+        {
+            clique=0;
+            mem=0;
+        }
+
+        //show_mouse(tampon);
+        circlefill(tampon,mouse_x,mouse_y,10,makecol(255,127,127));
         //masked_blit(personnage,tampon,0,0,mouse_x,mouse_y,60,70);
         blit(tampon,screen,0,0,0,0,1280,720);
-        rest(50);
+        rest(25);
     }
     liberer(map,bot,taillex);
     return 0;
