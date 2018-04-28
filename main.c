@@ -4,8 +4,8 @@ int main()
 {
     initalleg();
     int vitesse=5;
-    int clique=0;
-    int mem;
+    int cliquedrag=0;
+    int mem=0;
     int i=0,j=0,k=0;
     int taillex=5, tailley=5;
     int action[5]= {1,2,3,4,5};
@@ -20,7 +20,9 @@ int main()
     BITMAP *rotateleft;
     BITMAP *rotateright;
     BITMAP *spring;
-    int decalx=350, decaly=150;
+    BITMAP *souristempo;
+    BITMAP *souris;
+    int decalx=300, decaly=150;
     t_personnage *bot;
     int **map;
     map=malloc(tailley*sizeof(int*));
@@ -43,7 +45,9 @@ int main()
     rotateleft=load_bitmap("Image/RotateLeft.bmp",NULL);
     rotateright=load_bitmap("Image/RotateRight.bmp",NULL);
     spring=load_bitmap("Image/Spring.bmp",NULL);
-
+    souristempo=load_bitmap("Image/Cursor.bmp",NULL);
+    souris=create_bitmap(50,62);
+    stretch_blit(souristempo,souris,0,0,souristempo->w,souristempo->h,0,0,souris->w,souris->h);
     bot = calloc(5,sizeof(t_personnage)); ///5 bots
     for(k=0; k<5; k++) ///On parcourt les 5 bots
     {
@@ -81,53 +85,12 @@ int main()
             draw_sprite(tampon,bot[0].sprite[3][8],bot[0].isox+decalx+35,bot[0].isoy+decaly-10);
             i=0;
         }
-        draw_sprite(tampon,main,800,100); ///Affichage de la fenetre du main
-        ///Affichage des tuiles des actions de deplacement
-        j=0;
-        for(j=0; j<5; j++)
-        {
-            if(action[j] == 1)
-                draw_sprite(tampon,actionforward,150+j*100,600);
-            else if(action[j] == 2)
-                draw_sprite(tampon,actionlight,150+j*100,600);
-            else if(action[j] == 3)
-                draw_sprite(tampon,rotateleft,150+j*100,600);
-            else if(action[j] == 4)
-                draw_sprite(tampon,rotateright,150+j*100,600);
-            else if(action[j] == 5)
-                draw_sprite(tampon,spring,150+j*100,600);
-            if(mouse_b&1 && (mouse_x>150+j*100 && mouse_x < 150+(j+1)*100) && mouse_y > 600 && mouse_y < 700 )
-            {
-                if(action[j] != 0)
-                {
-                    clique=1;
-                    mem=action[j];
-                }
-            }
-        }
-        if(clique == 1){
-        if(mem == 1)
-            draw_sprite(tampon,actionforward,mouse_x-50,mouse_y-50);
-        if(mem == 2)
-            draw_sprite(tampon,actionlight,mouse_x-50,mouse_y-50);
-        if(mem == 3)
-            draw_sprite(tampon,rotateleft,mouse_x-50,mouse_y-50);
-        if(mem == 4)
-            draw_sprite(tampon,rotateright,mouse_x-50,mouse_y-50);
-        if(mem == 5)
-            draw_sprite(tampon,spring,mouse_x-50,mouse_y-50);
+        draw_sprite(tampon,main,750,100); ///Affichage de la fenetre du main
+        draganddrop(tampon,actionforward,actionlight,rotateleft,rotateright,spring,&mem,action,&cliquedrag);
 
-
-        }
-        if(!mouse_b&1)
-        {
-            clique=0;
-            mem=0;
-        }
-
-        //show_mouse(tampon);
-        circlefill(tampon,mouse_x,mouse_y,10,makecol(255,127,127));
-        //masked_blit(personnage,tampon,0,0,mouse_x,mouse_y,60,70);
+        //circlefill(tampon,mouse_x,mouse_y,10,makecol(255,127,127));
+        draw_sprite(tampon,souris,mouse_x,mouse_y);
+        //masked_blit(souris,tampon,0,0,mouse_x,mouse_y,60,70);
         blit(tampon,screen,0,0,0,0,1280,720);
         rest(25);
     }

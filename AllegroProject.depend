@@ -1,8 +1,8 @@
 # depslib dependency file v1.0
-1524745418 source:c:\users\antoine\desktop\gitproject\projetallegro\main.c
+1524917188 source:c:\users\antoine\desktop\gitproject\projetallegro\main.c
 	"Prototype.h"
 
-1524741995 c:\users\antoine\desktop\gitproject\projetallegro\prototype.h
+1524913961 c:\users\antoine\desktop\gitproject\projetallegro\prototype.h
 	<stdio.h>
 	<stdlib.h>
 	<allegro.h>
@@ -12,9 +12,15 @@
 1524732217 source:c:\users\antoine\desktop\gitproject\projetallegro\affichage.c
 	"Prototype.h"
 
-1524558450 source:c:\users\antoine\desktop\gitproject\projetallegro\initfree.c
+1524913961 source:c:\users\antoine\desktop\gitproject\projetallegro\initfree.c
 	"Prototype.h"
 
-1524742890 source:c:\users\antoine\desktop\gitproject\projetallegro\dragdrop.c
+1524913961 source:c:\users\antoine\desktop\gitproject\projetallegro\dragdrop.c
 	"Prototype.h"
+
+1524913961 source:c:\users\antoine\desktop\gitproject\projetallegro\gestionpile.c
+	"Prototype.h"
+	"gestionPile.h"
+
+1524913961 c:\users\antoine\desktop\gitproject\projetallegro\gestionpile.h
 

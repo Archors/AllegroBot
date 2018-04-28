@@ -44,6 +44,9 @@
 		<Unit filename="dragdrop.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="gestionPile.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>

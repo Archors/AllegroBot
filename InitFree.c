@@ -5,12 +5,12 @@ void liberer(int **map, t_personnage *bot, int taillex)
     int i=0, k=0;
     for(k=0; k<5; k++) ///Liberation du bot
     {
-            for(i=0; i<4; i++)
-                free(bot[k].sprite[i]);
-            free(bot[k].sprite);
+        for(i=0; i<4; i++)
+            free(bot[k].sprite[i]);
+        free(bot[k].sprite);
     }
     free(bot);
-    for(i=0;i<taillex;i++) ///Liberation de la map
+    for(i=0; i<taillex; i++) ///Liberation de la map
         free(map[i]);
     free(map);
 }
