@@ -1,6 +1,6 @@
 #include "Prototype.h"
 
-void draganddrop(BITMAP* tampon, BITMAP* forward, BITMAP* light, BITMAP* left, BITMAP* right,BITMAP* spring, int *mem, int action[5], int *cliquedrag)
+void draganddrop(pileAction *mainB1, BITMAP* tampon, BITMAP* forward, BITMAP* light, BITMAP* left, BITMAP* right,BITMAP* spring, int *mem, int action[5], int *cliquedrag)
 {
     int j=0;
     for(j=0; j<5; j++)
@@ -23,9 +23,10 @@ void draganddrop(BITMAP* tampon, BITMAP* forward, BITMAP* light, BITMAP* left, B
             draw_sprite(tampon,spring,100+j*100,600);
             break;
         }
-        if(mouse_b&1 && (mouse_x>100+j*100 && mouse_x < 100+(j+1)*100) && mouse_y > 600 && mouse_y < 700 )
+        if(mouse_b&1 && (mouse_x>100+j*100 && mouse_x < 100+(j+1)*100) && mouse_y > 600 && mouse_y < 700 && (*cliquedrag) != 1)
         {
             ///Envoi de l'instruction dans la pile
+                    addIn(mainB1,0,action[j]);
 
             if(action[j] != 0)
             {

@@ -182,16 +182,16 @@ void showPile(pileAction* pile,BITMAP* tampon, BITMAP * actionforward, BITMAP * 
                 draw_sprite(tampon,actionforward,805+(100*cpt),150+(100*row));
                 break;
             case ROTATE_LEFT :
-                draw_sprite(tampon,rotateleft,805+(100*cpt),135+(100*(cpt%4)));
+                draw_sprite(tampon,rotateleft,805+(100*cpt),150+(100*row));
                 break;
             case ROTATE_RIGHT :
-                draw_sprite(tampon,rotateright,805+(100*cpt),135+(100*(cpt%4)));
+                draw_sprite(tampon,rotateright,805+(100*cpt),150+(100*row));
                 break;
             case LIGHT :
-                draw_sprite(tampon,actionlight,802+(100*cpt),135+(100*(cpt%4)));
+                draw_sprite(tampon,actionlight,805+(100*cpt),150+(100*row));
                 break;
             case JUMP :
-                draw_sprite(tampon,spring,802+(100*cpt),135+(100*(cpt%4)));
+                draw_sprite(tampon,spring,805+(100*cpt),150+(100*row));
                 break;
             default:
                 break;

@@ -6,10 +6,10 @@
 #include <time.h>
 #include <math.h>
 #define AVANCER 1
-#define ROTATE_LEFT 2
-#define ROTATE_RIGHT 3
-#define JUMP 4
-#define LIGHT 5
+#define ROTATE_LEFT 3
+#define ROTATE_RIGHT 4
+#define JUMP 5
+#define LIGHT 2
 #define UP 1
 #define LEFT 2
 #define RIGHT 3
@@ -29,13 +29,28 @@ typedef struct perso
     BITMAP ***sprite;
 } t_personnage;
 
+typedef struct action
+{
+    int type;                   ///QUELLE ACTION CEST
+    struct action * suiv;
+} t_action;
+
+typedef struct
+{
+    t_action * first;
+
+} pileAction;
+
+
 void MapCreation(int **tab, int taillex, int tailley,int decalx, int decaly,BITMAP *tampon, BITMAP *sol,BITMAP *tolight, BITMAP *light);
 void decoupage(BITMAP *base, BITMAP ***decoupe);
 void liberer(int **map, t_personnage *bot, int taillex);
 void initalleg();
 void deplacement(t_personnage *personnage, int vitesse);
-void draganddrop(BITMAP* tampon, BITMAP* forward, BITMAP* light, BITMAP* left, BITMAP* right,BITMAP* spring, int *mem, int action[5], int *cliquedrag);
+void draganddrop(pileAction* MainB1, BITMAP* tampon, BITMAP* forward, BITMAP* light, BITMAP* left, BITMAP* right,BITMAP* spring, int *mem, int action[5], int *cliquedrag);
 int toisox(int x, int y);
 int toisoy(int x, int y);
+void addIn(pileAction * pile, int index, int type);
+
 
 #endif // PROTOTYPE_H_INCLUDED

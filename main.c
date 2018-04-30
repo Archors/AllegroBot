@@ -7,6 +7,7 @@ int main()
     int vitesse=5;
     int cliquedrag=0;
     int mem=0;
+    int tempoclique=0;
     int i=0,j=0,k=0;
     int taillex=5, tailley=5;
     int action[5]= {1,2,3,4,5};
@@ -23,6 +24,7 @@ int main()
     BITMAP *spring;
     BITMAP *souristempo;
     BITMAP *souris;
+    pileAction * mainB1 = calloc(1,sizeof(pileAction));
     int decalx=300, decaly=150;
     t_personnage *bot;
     int **map;
@@ -69,13 +71,6 @@ int main()
     bot[0].isoy=toisoy(bot[0].x,bot[0].y);
     bot[0].dirisox=toisox(bot[0].dirx,bot[0].diry);
     bot[0].dirisoy=toisoy(bot[0].dirx,bot[0].diry);
-    pileAction * mainB1 = calloc(1,sizeof(pileAction));
-    addIn(mainB1,0,AVANCER);
-    addIn(mainB1,0,AVANCER);
-    addIn(mainB1,0,AVANCER);
-    addIn(mainB1,0,AVANCER);
-    addIn(mainB1,0,AVANCER);
-    addIn(mainB1,0,AVANCER);
     addIn(mainB1,0,AVANCER);
     while (!key[KEY_ESC])
     {
@@ -95,8 +90,8 @@ int main()
             i=0;
         }
         draw_sprite(tampon,main,800,100); ///Affichage de la fenetre du main
-        draganddrop(tampon,actionforward,actionlight,rotateleft,rotateright,spring,&mem,action,&cliquedrag);
         showPile(mainB1,tampon,actionforward,actionlight,rotateleft,rotateright,spring);
+        draganddrop(mainB1,tampon,actionforward,actionlight,rotateleft,rotateright,spring,&mem,action,&cliquedrag);
         draw_sprite(tampon,souris,mouse_x,mouse_y); ///Affichage de la souris
         blit(tampon,screen,0,0,0,0,1280,720);
         rest(25);
