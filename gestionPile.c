@@ -1,14 +1,6 @@
 #include "Prototype.h"
 #include "gestionPile.h"
-#define AVANCER 1
-#define ROTATE_LEFT 2
-#define ROTATE_RIGHT 3
-#define JUMP 4
-#define LIGHT 5
-#define UP 1
-#define LEFT 2
-#define RIGHT 3
-#define DOWN 4
+
 
 void addIn(pileAction * pile, int index, int type)
 {
@@ -175,3 +167,37 @@ void readPile(pileAction * pile, int * index,int x,int y, int *dirx, int *diry, 
         break;
     }
 }
+void showPile(pileAction* pile,BITMAP* tampon, BITMAP * actionforward, BITMAP * actionlight, BITMAP * rotateleft, BITMAP * rotateright, BITMAP * spring)
+{
+    int cpt=1;
+    t_action * cour=pile->first;
+    if(cour!=NULL)
+    {
+        while(cour!=NULL)
+        {
+            switch(cour->type)
+            {
+            case AVANCER :
+                draw_sprite(tampon,actionforward,802+(100*cpt),135+(100*(cpt%4)));
+                break;
+            case ROTATE_LEFT :
+                draw_sprite(tampon,rotateleft,802+(100*cpt),135+(100*(cpt%4)));
+                break;
+            case ROTATE_RIGHT :
+                draw_sprite(tampon,rotateright,802+(100*cpt),135+(100*(cpt%4)));
+                break;
+            case LIGHT :
+                draw_sprite(tampon,actionlight,802+(100*cpt),135+(100*(cpt%4)));
+                break;
+            case JUMP :
+                draw_sprite(tampon,spring,802+(100*cpt),135+(100*(cpt%4)));
+                break;
+            default:
+                break;
+            }
+            cpt++;
+            cour=cour->suiv;
+        }
+    }
+}
+

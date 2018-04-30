@@ -5,6 +5,15 @@
 #include <allegro.h>
 #include <time.h>
 #include <math.h>
+#define AVANCER 1
+#define ROTATE_LEFT 2
+#define ROTATE_RIGHT 3
+#define JUMP 4
+#define LIGHT 5
+#define UP 1
+#define LEFT 2
+#define RIGHT 3
+#define DOWN 4
 
 typedef struct perso
 {

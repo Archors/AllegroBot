@@ -1,4 +1,5 @@
 #include "Prototype.h"
+#include "gestionPile.h"
 
 int main()
 {
@@ -68,6 +69,8 @@ int main()
     bot[0].isoy=toisoy(bot[0].x,bot[0].y);
     bot[0].dirisox=toisox(bot[0].dirx,bot[0].diry);
     bot[0].dirisoy=toisoy(bot[0].dirx,bot[0].diry);
+    pileAction * mainB1 = calloc(1,sizeof(pileAction));
+    addIn(mainB1,0,AVANCER);
     while (!key[KEY_ESC])
     {
         clear_bitmap(tampon);
@@ -87,6 +90,7 @@ int main()
         }
         draw_sprite(tampon,main,750,100); ///Affichage de la fenetre du main
         draganddrop(tampon,actionforward,actionlight,rotateleft,rotateright,spring,&mem,action,&cliquedrag);
+        showPile(mainB1,tampon,actionforward,actionlight,rotateleft,rotateright,spring);
         draw_sprite(tampon,souris,mouse_x,mouse_y); ///Affichage de la souris
         blit(tampon,screen,0,0,0,0,1280,720);
         rest(25);
