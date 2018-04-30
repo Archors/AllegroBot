@@ -169,7 +169,8 @@ void readPile(pileAction * pile, int * index,int x,int y, int *dirx, int *diry, 
 }
 void showPile(pileAction* pile,BITMAP* tampon, BITMAP * actionforward, BITMAP * actionlight, BITMAP * rotateleft, BITMAP * rotateright, BITMAP * spring)
 {
-    int cpt=1;
+    int cpt=0;
+    int row=0;
     t_action * cour=pile->first;
     if(cour!=NULL)
     {
@@ -178,13 +179,13 @@ void showPile(pileAction* pile,BITMAP* tampon, BITMAP * actionforward, BITMAP * 
             switch(cour->type)
             {
             case AVANCER :
-                draw_sprite(tampon,actionforward,802+(100*cpt),135+(100*(cpt%4)));
+                draw_sprite(tampon,actionforward,805+(100*cpt),150+(100*row));
                 break;
             case ROTATE_LEFT :
-                draw_sprite(tampon,rotateleft,802+(100*cpt),135+(100*(cpt%4)));
+                draw_sprite(tampon,rotateleft,805+(100*cpt),135+(100*(cpt%4)));
                 break;
             case ROTATE_RIGHT :
-                draw_sprite(tampon,rotateright,802+(100*cpt),135+(100*(cpt%4)));
+                draw_sprite(tampon,rotateright,805+(100*cpt),135+(100*(cpt%4)));
                 break;
             case LIGHT :
                 draw_sprite(tampon,actionlight,802+(100*cpt),135+(100*(cpt%4)));
@@ -196,6 +197,10 @@ void showPile(pileAction* pile,BITMAP* tampon, BITMAP * actionforward, BITMAP * 
                 break;
             }
             cpt++;
+            if(cpt==4){
+                row++;
+                cpt=0;
+            }
             cour=cour->suiv;
         }
     }

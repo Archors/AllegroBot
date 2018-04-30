@@ -47,7 +47,7 @@ int main()
     rotateright=load_bitmap("Image/RotateRight.bmp",NULL);
     spring=load_bitmap("Image/Spring.bmp",NULL);
     souristempo=load_bitmap("Image/Cursor.bmp",NULL);
-    souris=create_bitmap(50,62);
+    souris=create_bitmap(25,31);
     stretch_blit(souristempo,souris,0,0,souristempo->w,souristempo->h,0,0,souris->w,souris->h);
     bot = calloc(5,sizeof(t_personnage)); ///5 bots
     for(k=0; k<5; k++) ///On parcourt les 5 bots
@@ -71,6 +71,12 @@ int main()
     bot[0].dirisoy=toisoy(bot[0].dirx,bot[0].diry);
     pileAction * mainB1 = calloc(1,sizeof(pileAction));
     addIn(mainB1,0,AVANCER);
+    addIn(mainB1,0,AVANCER);
+    addIn(mainB1,0,AVANCER);
+    addIn(mainB1,0,AVANCER);
+    addIn(mainB1,0,AVANCER);
+    addIn(mainB1,0,AVANCER);
+    addIn(mainB1,0,AVANCER);
     while (!key[KEY_ESC])
     {
         clear_bitmap(tampon);
@@ -88,7 +94,7 @@ int main()
             draw_sprite(tampon,bot[0].sprite[3][8],bot[0].isox+decalx+35,bot[0].isoy+decaly-10);
             i=0;
         }
-        draw_sprite(tampon,main,750,100); ///Affichage de la fenetre du main
+        draw_sprite(tampon,main,800,100); ///Affichage de la fenetre du main
         draganddrop(tampon,actionforward,actionlight,rotateleft,rotateright,spring,&mem,action,&cliquedrag);
         showPile(mainB1,tampon,actionforward,actionlight,rotateleft,rotateright,spring);
         draw_sprite(tampon,souris,mouse_x,mouse_y); ///Affichage de la souris
