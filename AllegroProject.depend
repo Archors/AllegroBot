@@ -25,3 +25,29 @@
 
 1524913961 c:\users\antoine\desktop\gitproject\projetallegro\gestionpile.h
 
+1525090519 source:c:\projetallegro\affichage.c
+	"Prototype.h"
+
+1525090519 c:\projetallegro\prototype.h
+	<stdio.h>
+	<stdlib.h>
+	<allegro.h>
+	<time.h>
+	<math.h>
+
+1525090519 source:c:\projetallegro\dragdrop.c
+	"Prototype.h"
+
+1525090519 source:c:\projetallegro\gestionpile.c
+	"Prototype.h"
+	"gestionPile.h"
+
+1525090519 c:\projetallegro\gestionpile.h
+
+1525090519 source:c:\projetallegro\initfree.c
+	"Prototype.h"
+
+1525090519 source:c:\projetallegro\main.c
+	"Prototype.h"
+	"gestionPile.h"
+
