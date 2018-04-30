@@ -25,18 +25,15 @@ void draganddrop(BITMAP* tampon, BITMAP* forward, BITMAP* light, BITMAP* left, B
         }
         if(mouse_b&1 && (mouse_x>100+j*100 && mouse_x < 100+(j+1)*100) && mouse_y > 600 && mouse_y < 700 )
         {
+            ///Envoi de l'instruction dans la pile
+
             if(action[j] != 0)
             {
                 (*cliquedrag)=1;
                 (*mem)=action[j];
             }
-
-            if((mouse_x>100+j*100 && mouse_x < 100+(j+1)*100) && mouse_y > 600 && mouse_y < 700)
-            {
-                draw_sprite(tampon,forward,750,140);
-            }
-
         }
+
     }
     if((*cliquedrag) == 1)
     {
@@ -60,6 +57,7 @@ void draganddrop(BITMAP* tampon, BITMAP* forward, BITMAP* light, BITMAP* left, B
     }
     if(!mouse_b&1)
     {
+//        if(mouse_x < )
         (*cliquedrag)=0;
         (*mem)=0;
     }

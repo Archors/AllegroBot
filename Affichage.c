@@ -31,11 +31,6 @@ void MapCreation(int **tab, int taillex, int tailley,int decalx, int decaly,BITM
     }
 }
 
-void decalage(int taillex, int tailley, int *decalx, int *decaly)
-{
-    *decalx = (screen->w/2)-((137/2)*taillex)+100;
-    *decaly = (screen->h/2)-((86/2)*tailley)-20;
-}
 
 ///Reception des sprites sur 1 image et decoupe en plusieurs images
 void decoupage(BITMAP *base, BITMAP ***decoupe)

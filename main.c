@@ -87,10 +87,7 @@ int main()
         }
         draw_sprite(tampon,main,750,100); ///Affichage de la fenetre du main
         draganddrop(tampon,actionforward,actionlight,rotateleft,rotateright,spring,&mem,action,&cliquedrag);
-
-        //circlefill(tampon,mouse_x,mouse_y,10,makecol(255,127,127));
-        draw_sprite(tampon,souris,mouse_x,mouse_y);
-        //masked_blit(souris,tampon,0,0,mouse_x,mouse_y,60,70);
+        draw_sprite(tampon,souris,mouse_x,mouse_y); ///Affichage de la souris
         blit(tampon,screen,0,0,0,0,1280,720);
         rest(25);
     }

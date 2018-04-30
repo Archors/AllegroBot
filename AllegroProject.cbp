@@ -47,6 +47,7 @@
 		<Unit filename="gestionPile.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="gestionPile.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
