@@ -7,6 +7,7 @@ int main()
     int vitesse=5;
     int cliquedrag=0;
     int mem=0;
+    int play;
     int i=0,j=0,k=0;
     int taillex=5, tailley=5;
     int action[5]= {1,2,3,4,5};
@@ -24,6 +25,7 @@ int main()
     BITMAP *spring;
     BITMAP *souristempo;
     BITMAP *souris;
+    BITMAP *boutonjouer;
     int decalx=300, decaly=150;
     t_personnage *bot;
     int **map;
@@ -49,6 +51,7 @@ int main()
     spring=load_bitmap("Image/Spring.bmp",NULL);
     souristempo=load_bitmap("Image/Cursor.bmp",NULL);
     fond=load_bitmap("Image/Fond.bmp",NULL);
+    boutonjouer=load_bitmap("Image/BoutonJouer.bmp",NULL);
     souris=create_bitmap(25,31);
     stretch_blit(souristempo,souris,0,0,souristempo->w,souristempo->h,0,0,souris->w,souris->h);
     bot = calloc(5,sizeof(t_personnage)); ///5 bots
@@ -77,6 +80,7 @@ int main()
         clear_bitmap(tampon);
         blit(fond,tampon,0,0,0,0,fond->w,fond->h);
         MapCreation(map,taillex,tailley,decalx,decaly,tampon,sol,tolight,light);
+        draw_sprite(tampon,boutonjouer,800,20);
         if(bot[0].isox != bot[0].dirisox && bot[0].isoy != bot[0].dirisoy)
         {
             deplacement(bot,vitesse);
@@ -92,6 +96,8 @@ int main()
         }
         draw_sprite(tampon,main,800,100); ///Affichage de la fenetre du main
         showPile(bot[0].themain,tampon,actionforward,actionlight,rotateleft,rotateright,spring);
+        /*if(play == 1 && )
+        readPile(bot,0,map,taillex,tailley);*/
         draganddrop(bot,tampon,actionforward,actionlight,rotateleft,rotateright,spring,&mem,action,&cliquedrag);
         draw_sprite(tampon,souris,mouse_x,mouse_y); ///Affichage de la souris
         blit(tampon,screen,0,0,0,0,1280,720);

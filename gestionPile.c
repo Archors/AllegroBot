@@ -166,6 +166,8 @@ void readPile(t_personnage* bot,int numero, int **niv, int tailleX, int tailleY)
             bot[numero].direction++;
         break;
     }
+    bot[numero].dirisox=toisox(bot[numero].x,bot[numero].y);
+    bot[numero].dirisoy=toisox(bot[numero].x,bot[numero].y);
 }
 void showPile(pileAction* pile,BITMAP* tampon, BITMAP * actionforward, BITMAP * actionlight, BITMAP * rotateleft, BITMAP * rotateright, BITMAP * spring)
 {
