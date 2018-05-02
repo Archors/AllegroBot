@@ -15,20 +15,6 @@
 #define RIGHT 3
 #define DOWN 4
 
-typedef struct perso
-{
-    int x; ///Position en 2D
-    int y;
-    int isox; ///Position actuel en 2D isometrique
-    int isoy;
-    int dirx;
-    int diry;
-    int dirisox; ///Position en 2D isometrique
-    int dirisoy;
-    int direction;
-    BITMAP ***sprite;
-} t_personnage;
-
 typedef struct action
 {
     int type;                   ///QUELLE ACTION CEST
@@ -41,13 +27,30 @@ typedef struct
 
 } pileAction;
 
+typedef struct perso
+{
+    int x; ///Position en 2D
+    int y;
+    int isox; ///Position actuel en 2D isometrique
+    int isoy;
+    int dirx;
+    int diry;
+    int dirisox; ///Position en 2D isometrique
+    int dirisoy;
+    int direction;
+    int index;
+    int compteur;
+    pileAction* themain;
+    BITMAP ***sprite;
+} t_personnage;
+
 
 void MapCreation(int **tab, int taillex, int tailley,int decalx, int decaly,BITMAP *tampon, BITMAP *sol,BITMAP *tolight, BITMAP *light);
 void decoupage(BITMAP *base, BITMAP ***decoupe);
 void liberer(int **map, t_personnage *bot, int taillex);
 void initalleg();
 void deplacement(t_personnage *personnage, int vitesse);
-void draganddrop(pileAction* MainB1, BITMAP* tampon, BITMAP* forward, BITMAP* light, BITMAP* left, BITMAP* right,BITMAP* spring, int *mem, int action[5], int *cliquedrag);
+void draganddrop(t_personnage* bot, BITMAP* tampon, BITMAP* forward, BITMAP* light, BITMAP* left, BITMAP* right,BITMAP* spring, int *mem, int action[5], int *cliquedrag);
 int toisox(int x, int y);
 int toisoy(int x, int y);
 void addIn(pileAction * pile, int index, int type);
