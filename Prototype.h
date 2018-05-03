@@ -10,10 +10,11 @@
 #define ROTATE_RIGHT 4
 #define JUMP 5
 #define LIGHT 2
-#define UP 1
-#define LEFT 2
-#define RIGHT 3
-#define DOWN 4
+#define UP 0
+#define DOWN 1
+#define RIGHT 2
+#define LEFT 3
+
 
 typedef struct action
 {
@@ -40,6 +41,7 @@ typedef struct perso
     int direction;
     int index;
     int compteur;
+    int actuelsprite;
     pileAction* themain;
     BITMAP ***sprite;
 } t_personnage;
@@ -54,6 +56,8 @@ void draganddrop(t_personnage* bot, BITMAP* tampon, BITMAP* forward, BITMAP* lig
 int toisox(int x, int y);
 int toisoy(int x, int y);
 void addIn(pileAction * pile, int index, int type);
-
+void bouton(BITMAP* tampon, BITMAP* jouer, BITMAP* stop, int *play, int *tempo);
+void drag(pileAction* pile, int *cliquedrag,int *mem);
+void affsprite(t_personnage* bot,BITMAP* tampon,int decalx, int decaly);
 
 #endif // PROTOTYPE_H_INCLUDED

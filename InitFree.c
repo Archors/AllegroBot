@@ -8,6 +8,7 @@ void liberer(int **map, t_personnage *bot, int taillex)
         for(i=0; i<4; i++)
             free(bot[k].sprite[i]);
         free(bot[k].sprite);
+        ///Free de la liste chainee
     }
     free(bot);
     for(i=0; i<taillex; i++) ///Liberation de la map

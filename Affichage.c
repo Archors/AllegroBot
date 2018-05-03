@@ -66,3 +66,55 @@ void deplacement(t_personnage *bot, int vitesse)
         bot[i].isoy=bot[i].dirisoy;
     }
 }
+
+void bouton(BITMAP* tampon, BITMAP* jouer, BITMAP* stop, int *play, int *tempo)
+{
+    if(tempo > 0)
+        (*tempo)--;
+    if(*play == 0)
+        draw_sprite(tampon,jouer,800,20); ///Affichage du bouton pour lancer la compilation
+    if(*play == 1)
+        draw_sprite(tampon,stop,800,20);
+    if(mouse_b&1 && mouse_x > 800 && mouse_y > 20 && mouse_x < 800 + jouer->w && mouse_y < 20 + jouer->h && *tempo < 0)
+    {
+        if(*play==0)
+        {
+            *play=1;
+            *tempo = 13;
+        }
+        else
+        {
+            *play=0;
+            *tempo=13;
+        }
+    }
+}
+
+void affsprite(t_personnage* bot,BITMAP* tampon,int decalx, int decaly)
+{
+    int i=0;
+    //for(i=0; i<5; i++)
+    switch (bot[i].direction)
+    {
+    case UP:
+        draw_sprite(tampon, bot[i].sprite[UP][bot[i].actuelsprite], bot[i].isox+decalx+35,bot[0].isoy+decaly-10);
+        break;
+    case DOWN:
+        draw_sprite(tampon, bot[i].sprite[DOWN][bot[i].actuelsprite], bot[i].isox+decalx+35,bot[0].isoy+decaly-10);
+        break;
+    case LEFT:
+        draw_sprite(tampon, bot[i].sprite[LEFT][bot[i].actuelsprite], bot[i].isox+decalx+35,bot[0].isoy+decaly-10);
+        break;
+    case RIGHT:
+        draw_sprite(tampon, bot[i].sprite[RIGHT][bot[i].actuelsprite], bot[i].isox+decalx+35,bot[0].isoy+decaly-10);
+        break;
+    }
+    if(bot[i].isox == bot[i].dirisox && bot[i].isoy == bot[i].dirisoy)
+        bot[i].actuelsprite=8;
+    else
+    {
+        bot[i].actuelsprite--;
+        if(bot[i].actuelsprite < 0)
+            bot[i].actuelsprite = 8;
+    }
+}

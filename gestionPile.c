@@ -4,39 +4,41 @@
 
 void addIn(pileAction * pile, int index, int type)
 {
-
-    t_action * newAction = malloc(sizeof(t_action));
-    t_action * cour;
-    newAction->type=type;
-    if(index==0 && pile->first!=NULL)
+    if(index < 20)
     {
-        newAction->suiv=pile->first;
-        pile->first=newAction;
-    }
+        t_action * newAction = malloc(sizeof(t_action));
+        t_action * cour;
+        newAction->type=type;
+        if(index==0 && pile->first!=NULL)
+        {
+            newAction->suiv=pile->first;
+            pile->first=newAction;
+        }
 
-    if(index>0 && pile->first!=NULL)
-    {
-        cour = pile->first;
-        while(index-1!=0)
+        if(index>0 && pile->first!=NULL)
         {
-            cour=cour->suiv;
-            index--;
+            cour = pile->first;
+            while(index-1!=0)
+            {
+                cour=cour->suiv;
+                index--;
+            }
+            if(cour->suiv==NULL)
+            {
+                cour->suiv=newAction;
+                newAction->suiv=NULL;
+            }
+            else
+            {
+                newAction->suiv=cour->suiv;
+                cour->suiv=newAction;
+            }
         }
-        if(cour->suiv==NULL)
-        {
-            cour->suiv=newAction;
-            newAction->suiv=NULL;
-        }
-        else
-        {
-            newAction->suiv=cour->suiv;
-            cour->suiv=newAction;
-        }
-    }
 
-    if(pile->first==NULL)
-    {
-        pile->first=newAction;
+        if(pile->first==NULL)
+        {
+            pile->first=newAction;
+        }
     }
 }
 
@@ -169,10 +171,18 @@ void readPile(t_personnage* bot,int numero, int **niv, int tailleX, int tailleY)
     bot[numero].dirisox=toisox(bot[numero].x,bot[numero].y);
     bot[numero].dirisoy=toisox(bot[numero].x,bot[numero].y);
 }
+
+void delPile(pileAction * pile, int numero)
+{
+    /**/
+}
+
+
 void showPile(pileAction* pile,BITMAP* tampon, BITMAP * actionforward, BITMAP * actionlight, BITMAP * rotateleft, BITMAP * rotateright, BITMAP * spring)
 {
     int cpt=0;
     int row=0;
+    int nb=0;
     t_action * cour=pile->first;
     if(cour!=NULL)
     {
@@ -205,7 +215,94 @@ void showPile(pileAction* pile,BITMAP* tampon, BITMAP * actionforward, BITMAP * 
                 cpt=0;
             }
             cour=cour->suiv;
+            nb++;
         }
     }
 }
 
+void suppPile(pileAction* pile, int *cliquedrag, int *tempo)
+{
+    int cpt=0;
+    int row=0;
+    int nb=0;
+    t_action * cour=pile->first;
+    (*tempo)--;
+    if(cour!=NULL && *tempo < 0)
+    {
+        while(cour!=NULL)
+        {
+            if(*cliquedrag != 1 && mouse_b&1 && mouse_x > 805+(100*cpt) && mouse_x < 905+(100*cpt) && mouse_y > 150+(100*row) && mouse_y < 250+(100*row))
+            {
+                delAtIndex(pile,nb);
+                *tempo=5;
+                break;
+            }
+
+            cpt++;
+            if(cpt==4)
+            {
+                row++;
+                cpt=0;
+            }
+            cour=cour->suiv;
+            nb++;
+        }
+    }
+}
+
+int tailleliste(pileAction* pile)
+{
+    if(pile->first == NULL)
+        return 0;
+    int taille=0;
+    t_action *tempo=pile->first;
+    while(tempo != NULL)
+    {
+        tempo=tempo->suiv;
+        taille++;
+    }
+    return taille;
+}
+
+void addToEnd(pileAction * pile, int type)
+{
+    t_action * cour=pile->first;
+    int index=0;
+    if(cour == NULL)
+    {
+        addIn(pile,0,type);
+        return;
+    }
+    else
+    {
+        while(cour!=NULL)
+        {
+            cour=cour->suiv;
+            index++;
+        }
+        addIn(pile,index,type);
+    }
+}
+
+void delAtIndex(pileAction * pile, int fromIndex)
+{
+    if(fromIndex==0)
+    {
+        t_action * cour=pile->first;
+        pile->first=cour->suiv;
+        free(cour);
+    }
+    else
+    {
+        t_action * cour=pile->first;
+        t_action * prec=pile->first;
+        while(fromIndex!=0)
+        {
+            prec=cour;
+            cour=cour->suiv;
+            fromIndex--;
+        }
+        prec->suiv=cour->suiv;
+        free(cour);
+    }
+}
