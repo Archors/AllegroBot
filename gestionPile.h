@@ -9,5 +9,7 @@ int tailleliste(pileAction* pile);
 void suppPile(pileAction* pile, int *cliquedrag, int *tempo);
 void delAtIndex(pileAction * pile, int fromIndex);
 void addToEnd(pileAction * pile, int type);
+int readProc(t_personnage* bot, int numero, int **niv, int tailleX, int tailleY);
+void readPile(t_personnage* bot, int numero, int **niv, int tailleX, int tailleY);
 
 #endif

@@ -72,6 +72,7 @@ int main()
             for(i=0; i<9; i++)
                 bot[k].sprite[j][i]=create_bitmap(personnage->w/9,personnage->h/8);
         bot[k].themain = calloc(1,sizeof(pileAction));
+        bot[k].proc = calloc(1,sizeof(pileAction));
     }
     decoupage(personnage,bot[0].sprite);
     bot[0].x=0;
@@ -93,6 +94,8 @@ int main()
         bouton(tampon,boutonjouer,boutonstop,&play,&tempobouton); ///Gestion des boutons pour jouer et mettre en pause
         if(bot[0].isox != bot[0].dirisox && bot[0].isoy != bot[0].dirisoy)
             deplacement(bot,vitesse); ///Modification des coordonnes de deplacement
+        else if(play == 1)
+            readPile(bot,0,map,5,5);
         affsprite(bot,tampon,decalx,decaly); ///Affichage sprite
         draw_sprite(tampon,main,800,100); ///Affichage de la fenetre du main
         suppPile(bot[0].themain,&cliquedrag, &tempodelete);

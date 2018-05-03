@@ -2,27 +2,27 @@
 1525363968 source:c:\projetallegro\affichage.c
 	"Prototype.h"
 
-1525364032 c:\projetallegro\prototype.h
+1525375794 c:\projetallegro\prototype.h
 	<stdio.h>
 	<stdlib.h>
 	<allegro.h>
 	<time.h>
 	<math.h>
 
-1525366021 source:c:\projetallegro\dragdrop.c
+1525366209 source:c:\projetallegro\dragdrop.c
 	"Prototype.h"
 	"gestionPile.h"
 
-1525363968 source:c:\projetallegro\gestionpile.c
+1525375622 source:c:\projetallegro\gestionpile.c
 	"Prototype.h"
 	"gestionPile.h"
 
-1525364050 c:\projetallegro\gestionpile.h
+1525375764 c:\projetallegro\gestionpile.h
 
 1525340087 source:c:\projetallegro\initfree.c
 	"Prototype.h"
 
-1525365975 source:c:\projetallegro\main.c
+1525375733 source:c:\projetallegro\main.c
 	"Prototype.h"
 	"gestionPile.h"
 

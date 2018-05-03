@@ -14,6 +14,7 @@
 #define DOWN 1
 #define RIGHT 2
 #define LEFT 3
+#define PROC 6
 
 
 typedef struct action
@@ -43,6 +44,7 @@ typedef struct perso
     int compteur;
     int actuelsprite;
     pileAction* themain;
+    pileAction* proc;
     BITMAP ***sprite;
 } t_personnage;
 
@@ -59,5 +61,6 @@ void addIn(pileAction * pile, int index, int type);
 void bouton(BITMAP* tampon, BITMAP* jouer, BITMAP* stop, int *play, int *tempo);
 void drag(pileAction* pile, int *cliquedrag,int *mem);
 void affsprite(t_personnage* bot,BITMAP* tampon,int decalx, int decaly);
+void clique(pileAction *pile, int action[5],int *clique);
 
 #endif // PROTOTYPE_H_INCLUDED
