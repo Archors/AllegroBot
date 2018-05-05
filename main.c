@@ -11,6 +11,7 @@ int main()
     int play=0; ///Booleen de clique sur le bouton de compilation
     int tempobouton=0; ///Temporisation sur le bouton
     int tempodelete=0; ///Temporisation sur l
+    int tempoaction=0;
     int i=0,j=0,k=0;
     int taillex=5, tailley=5;
     int action[5]= {1,2,3,4,5};
@@ -40,6 +41,7 @@ int main()
     for(i=0; i<tailley; i++)
         for(j=0; j<taillex; j++)
             map[i][j]=1;
+    map[0][0]=2;
     map[4][4]=2;
     map[3][4]=3;
     map[3][3]=0;
@@ -80,8 +82,8 @@ int main()
     bot[0].actuelsprite=8;
     i=8;
     bot[0].dirx=0;
-    bot[0].diry=1;
-    bot[0].direction=2;
+    bot[0].diry=0;
+    bot[0].direction=DOWN;
     bot[0].isox=toisox(bot[0].x,bot[0].y);
     bot[0].isoy=toisoy(bot[0].x,bot[0].y);
     bot[0].dirisox=toisox(bot[0].dirx,bot[0].diry);
@@ -95,7 +97,16 @@ int main()
         if(bot[0].isox != bot[0].dirisox && bot[0].isoy != bot[0].dirisoy)
             deplacement(bot,vitesse); ///Modification des coordonnes de deplacement
         else if(play == 1)
-            readPile(bot,0,map,5,5);
+        {
+            if(bot[0].compteur < tailleliste(bot[0].themain) && tempoaction < 1)
+            {
+                readPile(bot,0,map,5,5,&tempoaction);
+                bot[0].compteur++;
+                bot[0].dirisox=toisox(bot[0].dirx,bot[0].diry);
+                bot[0].dirisoy=toisoy(bot[0].dirx,bot[0].diry);
+            }
+        }
+        tempoaction--;
         affsprite(bot,tampon,decalx,decaly); ///Affichage sprite
         draw_sprite(tampon,main,800,100); ///Affichage de la fenetre du main
         suppPile(bot[0].themain,&cliquedrag, &tempodelete);
@@ -104,7 +115,7 @@ int main()
         draganddrop(bot,tampon,actionforward,actionlight,rotateleft,rotateright,spring,&mem,action,&cliquedrag);
         draw_sprite(tampon,souris,mouse_x,mouse_y); ///Affichage de la souris
         blit(tampon,screen,0,0,0,0,1280,720);
-        rest(25);
+        rest(20);
     }
     liberer(map,bot,taillex);
     return 0;

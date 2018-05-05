@@ -8,26 +8,24 @@ void draganddrop(t_personnage *bot, BITMAP* tampon, BITMAP* forward, BITMAP* lig
     {
         switch(action[j])
         {
-        case 1:
+        case AVANCER:
             draw_sprite(tampon,forward,100+j*100,600);
             break;
-        case 2:
+        case LIGHT:
             draw_sprite(tampon,light,100+j*100,600);
             break;
-        case 3:
+        case ROTATE_LEFT    :
             draw_sprite(tampon,left,100+j*100,600);
             break;
-        case 4:
+        case ROTATE_RIGHT:
             draw_sprite(tampon,right,100+j*100,600);
             break;
-        case 5:
+        case JUMP:
             draw_sprite(tampon,spring,100+j*100,600);
             break;
         }
         if(mouse_b&1 && (mouse_x>100+j*100 && mouse_x < 100+(j+1)*100) && mouse_y > 600 && mouse_y < 700 && (*cliquedrag) != 1)
         {
-            ///Envoi de l'instruction dans la pile
-            //addToEnd(bot[0].themain,action[j]);
             if(action[j] != 0)
             {
                 (*cliquedrag)=1;
@@ -40,18 +38,18 @@ void draganddrop(t_personnage *bot, BITMAP* tampon, BITMAP* forward, BITMAP* lig
     {
         switch(*mem)
         {
-        case 1:
+        case AVANCER:
             draw_sprite(tampon,forward,mouse_x-50,mouse_y-50);
             break;
-        case 2:
+        case LIGHT:
             draw_sprite(tampon,light,mouse_x-50,mouse_y-50);
             break;
-        case 3:
+        case ROTATE_LEFT:
             draw_sprite(tampon,left,mouse_x-50,mouse_y-50);
-        case 4:
+        case ROTATE_RIGHT:
             draw_sprite(tampon,right,mouse_x-50,mouse_y-50);
             break;
-        case 5:
+        case JUMP:
             draw_sprite(tampon,spring,mouse_x-50,mouse_y-50);
             break;
         }

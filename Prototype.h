@@ -6,15 +6,16 @@
 #include <time.h>
 #include <math.h>
 #define AVANCER 1
+#define LIGHT 2
 #define ROTATE_LEFT 3
 #define ROTATE_RIGHT 4
 #define JUMP 5
-#define LIGHT 2
-#define UP 0
-#define DOWN 1
-#define RIGHT 2
-#define LEFT 3
 #define PROC 6
+#define LEFT 0
+#define UP 1
+#define DOWN 2
+#define RIGHT 3
+
 
 
 typedef struct action
