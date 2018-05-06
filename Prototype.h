@@ -43,6 +43,7 @@ typedef struct perso
     int index;
     int compteur;
     int cpt; ///Variable de la liste d'action
+    int cptProc; ///Variable de la liste d'action
     int actuelsprite;
     pileAction* themain;
     pileAction* proc;

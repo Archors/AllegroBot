@@ -63,6 +63,7 @@ void readPile(t_personnage* bot, int numero, int **niv, int tailleX, int tailleY
 {
     static int isProcActive[5]= {0};
     int cpt=bot[numero].cpt;
+    int end =0;
     /*if(cpt<=bot[numero].compteur)
     {*/
     if(isProcActive[numero]==0)
@@ -76,8 +77,9 @@ void readPile(t_personnage* bot, int numero, int **niv, int tailleX, int tailleY
                 cpt--;
             }
             else
-                break;
+                end=1;
         }
+        if(end==0){
         switch(cour->type)
         {
         case AVANCER :
@@ -136,20 +138,23 @@ void readPile(t_personnage* bot, int numero, int **niv, int tailleX, int tailleY
             break;
         }
         bot[0].cpt++;
+        }
     }
-    else
+    else{
         isProcActive[numero]=readProc(bot,numero,niv,tailleX,tailleY);
+        if(isProcActive[numero]==0)
+            bot[numero].cpt++;
+    }
     *tempo=30;
     //}
 }
 
 int readProc(t_personnage* bot, int numero, int **niv, int tailleX, int tailleY)
 {
-    static int actionCpt[5]= {0};
     t_action * cour = (bot[numero].proc)->first;
-    int cpt = actionCpt[numero];
     if(cour==NULL)
         return 0;
+    int cpt = bot[0].cptProc;
     while(cpt!=0)
     {
         if(cour->suiv!=NULL)
@@ -161,66 +166,64 @@ int readProc(t_personnage* bot, int numero, int **niv, int tailleX, int tailleY)
             break;
     }
     switch(cour->type)
-    {
-    case AVANCER :
-        switch((bot[numero].direction))
         {
-        case UP :
-            if(bot[numero].y-1>=0)
-                if(niv[bot[numero].x][bot[numero].y]==niv[bot[numero].x][bot[numero].y-1])
-                {
-                    (bot[numero].direction)--;
-                }
+        case AVANCER :
+            switch((bot[numero].direction))
+            {
+            case UP :
+                if(niv[bot[numero].dirx][bot[numero].diry-1]>0)
+                    (bot[numero].diry)--;
+                break;
+            case LEFT :
+                if(niv[bot[numero].dirx-1][bot[numero].diry]>0)
+                    (bot[numero].dirx)--;
+
+                break;
+            case DOWN :
+                if(niv[bot[numero].dirx][bot[numero].diry+1]>0)
+                    (bot[numero].diry)++;
+
+                break;
+            case RIGHT :
+                if(niv[bot[numero].dirx+1][bot[numero].diry]>0)
+                    (bot[numero].dirx)++;
+                break;
+            default :
+                break;
+            }
             break;
-        case LEFT :
-            if(bot[numero].x-1>=0)
-                if(niv[bot[numero].x][bot[numero].y]==niv[bot[numero].x-1][bot[numero].y])
-                {
-                    (bot[numero].direction)--;
-                }
+        case LIGHT :
+            if(niv[bot[numero].dirx][bot[numero].diry] == 2)
+                niv[bot[numero].dirx][bot[numero].diry] = 3;
+            else if(niv[bot[numero].dirx][bot[numero].diry] == 3)
+                niv[bot[numero].dirx][bot[numero].diry] = 2;
             break;
-        case DOWN :
-            if(bot[numero].y+1<tailleY)
-                if(niv[bot[numero].x][bot[numero].y]==niv[bot[numero].x][bot[numero].y+1])
-                {
-                    (bot[numero].direction)++;
-                }
+        case ROTATE_LEFT :
+            if(bot[numero].direction == LEFT)
+                bot[numero].direction = DOWN;
+            else if(bot[numero].direction == DOWN)
+                bot[numero].direction = RIGHT;
+            else if(bot[numero].direction == RIGHT)
+                bot[numero].direction = UP;
+            else if(bot[numero].direction == UP)
+                bot[numero].direction = LEFT;
             break;
-        case RIGHT :
-            if(bot[numero].x+1<tailleX)
-                if(niv[bot[numero].x][bot[numero].y]==niv[bot[numero].x+1][bot[numero].y])
-                {
-                    (bot[numero].direction)++;
-                }
+        case ROTATE_RIGHT :
+            if(bot[numero].direction == DOWN)
+                bot[numero].direction = LEFT;
+            else if(bot[numero].direction == RIGHT)
+                bot[numero].direction = DOWN;
+            else if(bot[numero].direction == UP)
+                bot[numero].direction = RIGHT;
+            else if(bot[numero].direction == LEFT)
+                bot[numero].direction = UP;
             break;
-        default :
+        case PROC :
+            bot[0].cptProc=0;
+            return 1;
             break;
         }
-        break;
-    case LIGHT :
-        if(niv[bot[numero].x][bot[numero].y]<10)
-            niv[bot[numero].x][bot[numero].y]+=10;
-        if(niv[bot[numero].x][bot[numero].y]>10)
-            niv[bot[numero].x][bot[numero].y]-=10;
-        break;
-    case ROTATE_LEFT :
-        if((bot[numero].direction)==1)
-        {
-            (bot[numero].direction)=4;
-        }
-        else
-            (bot[numero].direction)--;
-        break;
-    case ROTATE_RIGHT :
-        if((bot[numero].direction)==4)
-        {
-            (bot[numero].direction)=1;
-        }
-        else
-            (bot[numero].direction)++;
-        break;
-    }
-    actionCpt[numero]++;
+        bot[0].cptProc++;
     if(cour->suiv==NULL)
         return 0;
     else

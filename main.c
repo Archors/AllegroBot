@@ -87,6 +87,7 @@ int main()
     bot[0].dirx=0;
     bot[0].compteur=0;
     bot[0].cpt=0;
+    bot[0].cptProc=0;
     bot[0].diry=0;
     bot[0].direction=DOWN;
     bot[0].isox=toisox(bot[0].x,bot[0].y);
@@ -104,7 +105,7 @@ int main()
             deplacement(bot,vitesse); ///Modification des coordonnes de deplacement
         else if(play == 1)
         {
-            if(bot[0].compteur < tailleliste(bot[0].themain) && tempoaction < 1)
+            if(tempoaction < 1) //bot[0].compteur <= tailleliste(bot[0].themain)+ &&
             {
                 readPile(bot,0,map,5,5,&tempoaction ); ///Lit la pile d'action
                 bot[0].compteur++;///On incremente le compteur du nombre d'action
@@ -125,6 +126,9 @@ int main()
         else
         {
             ///Fenetre de la proc ouverte
+            suppPile(bot[0].proc,&cliquedrag, &tempodelete);
+            showPile(bot[0].proc,tampon,actionforward,actionlight,rotateleft,rotateright,actionproc);
+            clique(bot[0].proc,action,&boolclique);
 
         }
         draganddrop(bot,&boolmain,tampon,actionforward,actionlight,rotateleft,rotateright,actionproc,&mem,action,&cliquedrag);
