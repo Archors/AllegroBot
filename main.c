@@ -7,7 +7,9 @@ int main()
     int vitesse=5;
     int cliquedrag=0;
     int mem=0;
+    int lvl=1;
     int boolclique=0;
+    int boolmain=0;
     int play=0; ///Booleen de clique sur le bouton de compilation
     int tempobouton=0; ///Temporisation sur le bouton
     int tempodelete=0; ///Temporisation sur l
@@ -23,11 +25,12 @@ int main()
     BITMAP *tolight;
     BITMAP *light;
     BITMAP *main;
+    BITMAP *proc;
     BITMAP *actionforward;
     BITMAP *actionlight;
     BITMAP *rotateleft;
     BITMAP *rotateright;
-    BITMAP *spring;
+    BITMAP *actionproc;
     BITMAP *souristempo;
     BITMAP *souris;
     BITMAP *boutonjouer;
@@ -42,7 +45,6 @@ int main()
         for(j=0; j<taillex; j++)
             map[i][j]=1;
     map[0][0]=2;
-    map[4][4]=2;
     map[3][4]=3;
     map[3][3]=0;
     ///Creation du double buffer
@@ -53,11 +55,12 @@ int main()
     tolight=load_bitmap("Image/Tolight.bmp",NULL);
     light=load_bitmap("Image/Light.bmp",NULL);
     main=load_bitmap("Image/Main.bmp",NULL);
+    proc=load_bitmap("Image/Procedure.bmp",NULL);
     actionforward=load_bitmap("Image/Forward.bmp",NULL);
     actionlight=load_bitmap("Image/ActionLight.bmp",NULL);
+    actionproc=load_bitmap("Image/ActionProc.bmp",NULL);
     rotateleft=load_bitmap("Image/RotateLeft.bmp",NULL);
     rotateright=load_bitmap("Image/RotateRight.bmp",NULL);
-    spring=load_bitmap("Image/Spring.bmp",NULL);
     souristempo=load_bitmap("Image/Cursor.bmp",NULL);
     fond=load_bitmap("Image/Fond.bmp",NULL);
     boutonjouer=load_bitmap("Image/BoutonJouer.bmp",NULL);
@@ -82,6 +85,8 @@ int main()
     bot[0].actuelsprite=8;
     i=8;
     bot[0].dirx=0;
+    bot[0].compteur=0;
+    bot[0].cpt=0;
     bot[0].diry=0;
     bot[0].direction=DOWN;
     bot[0].isox=toisox(bot[0].x,bot[0].y);
@@ -92,6 +97,7 @@ int main()
     {
         clear_bitmap(tampon);
         blit(fond,tampon,0,0,0,0,fond->w,fond->h); ///Image en fond
+        changelvl(bot,&lvl,map,taillex,tailley,&play,&tempoaction); ///Verifie si le niveau est terminee
         MapCreation(map,taillex,tailley,decalx,decaly,tampon,sol,tolight,light);
         bouton(tampon,boutonjouer,boutonstop,&play,&tempobouton); ///Gestion des boutons pour jouer et mettre en pause
         if(bot[0].isox != bot[0].dirisox && bot[0].isoy != bot[0].dirisoy)
@@ -100,19 +106,28 @@ int main()
         {
             if(bot[0].compteur < tailleliste(bot[0].themain) && tempoaction < 1)
             {
-                readPile(bot,0,map,5,5,&tempoaction);
-                bot[0].compteur++;
+                readPile(bot,0,map,5,5,&tempoaction ); ///Lit la pile d'action
+                bot[0].compteur++;///On incremente le compteur du nombre d'action
+                ///Transforme les coordonnees cartesiennes en coordonnees isometriques
                 bot[0].dirisox=toisox(bot[0].dirx,bot[0].diry);
                 bot[0].dirisoy=toisoy(bot[0].dirx,bot[0].diry);
             }
         }
         tempoaction--;
         affsprite(bot,tampon,decalx,decaly); ///Affichage sprite
-        draw_sprite(tampon,main,800,100); ///Affichage de la fenetre du main
-        suppPile(bot[0].themain,&cliquedrag, &tempodelete);
-        showPile(bot[0].themain,tampon,actionforward,actionlight,rotateleft,rotateright,spring);
-        clique(bot[0].themain,action,&boolclique);
-        draganddrop(bot,tampon,actionforward,actionlight,rotateleft,rotateright,spring,&mem,action,&cliquedrag);
+        mainproc(&boolmain, tampon,main,proc);
+        if(boolmain == 0)  ///Fenetre du main ouverte
+        {
+            suppPile(bot[0].themain,&cliquedrag, &tempodelete);
+            showPile(bot[0].themain,tampon,actionforward,actionlight,rotateleft,rotateright,actionproc);
+            clique(bot[0].themain,action,&boolclique);
+        }
+        else
+        {
+            ///Fenetre de la proc ouverte
+
+        }
+        draganddrop(bot,&boolmain,tampon,actionforward,actionlight,rotateleft,rotateright,actionproc,&mem,action,&cliquedrag);
         draw_sprite(tampon,souris,mouse_x,mouse_y); ///Affichage de la souris
         blit(tampon,screen,0,0,0,0,1280,720);
         rest(20);

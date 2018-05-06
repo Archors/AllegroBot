@@ -1,7 +1,7 @@
 #include "Prototype.h"
 #include "gestionPile.h"
 
-void draganddrop(t_personnage *bot, BITMAP* tampon, BITMAP* forward, BITMAP* light, BITMAP* left, BITMAP* right,BITMAP* spring, int *mem, int action[5], int *cliquedrag)
+void draganddrop(t_personnage *bot,int *boolmain, BITMAP* tampon, BITMAP* forward, BITMAP* light, BITMAP* left, BITMAP* right,BITMAP* proc, int *mem, int action[5], int *cliquedrag)
 {
     int j=0;
     for(j=0; j<5; j++)
@@ -20,8 +20,8 @@ void draganddrop(t_personnage *bot, BITMAP* tampon, BITMAP* forward, BITMAP* lig
         case ROTATE_RIGHT:
             draw_sprite(tampon,right,100+j*100,600);
             break;
-        case JUMP:
-            draw_sprite(tampon,spring,100+j*100,600);
+        case PROC:
+            draw_sprite(tampon,proc,100+j*100,600);
             break;
         }
         if(mouse_b&1 && (mouse_x>100+j*100 && mouse_x < 100+(j+1)*100) && mouse_y > 600 && mouse_y < 700 && (*cliquedrag) != 1)
@@ -46,14 +46,18 @@ void draganddrop(t_personnage *bot, BITMAP* tampon, BITMAP* forward, BITMAP* lig
             break;
         case ROTATE_LEFT:
             draw_sprite(tampon,left,mouse_x-50,mouse_y-50);
+            break;
         case ROTATE_RIGHT:
             draw_sprite(tampon,right,mouse_x-50,mouse_y-50);
             break;
-        case JUMP:
-            draw_sprite(tampon,spring,mouse_x-50,mouse_y-50);
+        case PROC:
+            draw_sprite(tampon,proc,mouse_x-50,mouse_y-50);
             break;
         }
-        drag(bot[0].themain,cliquedrag,mem);
+        if(*boolmain == 0)
+            drag(bot[0].themain,cliquedrag,mem);
+        if(*boolmain == 1)
+            drag(bot[0].proc,cliquedrag,mem);
     }
     if(!mouse_b&1)
     {

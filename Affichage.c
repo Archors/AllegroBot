@@ -118,3 +118,21 @@ void affsprite(t_personnage* bot,BITMAP* tampon,int decalx, int decaly)
             bot[i].actuelsprite = 8;
     }
 }
+
+void mainproc(int *booleen,BITMAP* tampon, BITMAP *main, BITMAP *proc)
+{
+    if(mouse_b&1 && mouse_x > 800 && mouse_y > 100 && mouse_x < 872 && mouse_y < 142)
+        *booleen=0;
+    if(mouse_b&1 && mouse_x > 872 && mouse_y > 100 && mouse_x < 949 && mouse_y < 142)
+        *booleen=1;
+    if(*booleen == 1)
+    {
+        draw_sprite(tampon,main,800,100); ///Affichage de la fenetre du main
+        draw_sprite(tampon,proc,800,100); ///Affichage de la fenetre de la proc
+    }
+    else
+    {
+        draw_sprite(tampon,proc,800,100); ///Affichage de la fenetre de la proc
+        draw_sprite(tampon,main,800,100); ///Affichage de la fenetre du main
+    }
+}

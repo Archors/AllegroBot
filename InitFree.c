@@ -1,4 +1,5 @@
 #include "Prototype.h"
+#include "gestionPile.h"
 
 void liberer(int **map, t_personnage *bot, int taillex)
 {
@@ -9,6 +10,7 @@ void liberer(int **map, t_personnage *bot, int taillex)
             free(bot[k].sprite[i]);
         free(bot[k].sprite);
         ///Free de la liste chainee
+        listfree(bot[k].themain);
     }
     free(bot);
     for(i=0; i<taillex; i++) ///Liberation de la map
