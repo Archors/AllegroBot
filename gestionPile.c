@@ -42,30 +42,11 @@ void addIn(pileAction * pile, int index, int type)
     }
 }
 
-/*void changeOrder(pileAction * pile, int fromIndex, int toIndex)
-{
-    int type;
-    t_action * cour=pile->first;
-    t_action * prec=pile->first;
-    while(fromIndex!=0)
-    {
-        prec=cour;
-        cour=cour->suiv;
-        fromIndex--;
-    }
-    type=cour->type;
-    prec->suiv=cour->suiv;
-    addIn(pile,toIndex,type);
-    free(cour);
-}*/
-
 void readPile(t_personnage* bot, int numero, int **niv, int tailleX, int tailleY, int* tempo)
 {
     static int isProcActive[5]= {0};
     int cpt=bot[numero].cpt;
     int end =0;
-    /*if(cpt<=bot[numero].compteur)
-    {*/
     if(isProcActive[numero]==0)
     {
         t_action * cour= (bot[numero].themain)->first;
@@ -76,8 +57,9 @@ void readPile(t_personnage* bot, int numero, int **niv, int tailleX, int tailleY
                 cour=cour->suiv;
                 cpt--;
             }
-            else
+            else{
                 end=1;
+                break;}
         }
         if(end==0){
         switch(cour->type)
@@ -140,13 +122,9 @@ void readPile(t_personnage* bot, int numero, int **niv, int tailleX, int tailleY
         bot[0].cpt++;
         }
     }
-    else{
+    else
         isProcActive[numero]=readProc(bot,numero,niv,tailleX,tailleY);
-        if(isProcActive[numero]==0)
-            bot[numero].cpt++;
-    }
     *tempo=30;
-    //}
 }
 
 int readProc(t_personnage* bot, int numero, int **niv, int tailleX, int tailleY)
@@ -154,7 +132,7 @@ int readProc(t_personnage* bot, int numero, int **niv, int tailleX, int tailleY)
     t_action * cour = (bot[numero].proc)->first;
     if(cour==NULL)
         return 0;
-    int cpt = bot[0].cptProc;
+    int cpt = bot[numero].cptProc;
     while(cpt!=0)
     {
         if(cour->suiv!=NULL)
@@ -223,7 +201,7 @@ int readProc(t_personnage* bot, int numero, int **niv, int tailleX, int tailleY)
             return 1;
             break;
         }
-        bot[0].cptProc++;
+        bot[numero].cptProc++;
     if(cour->suiv==NULL)
         return 0;
     else

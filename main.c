@@ -35,6 +35,7 @@ int main()
     BITMAP *souris;
     BITMAP *boutonjouer;
     BITMAP *boutonstop;
+    BITMAP *multibot;
     int decalx=300, decaly=150;
     t_personnage *bot;
     int **map;
@@ -44,8 +45,8 @@ int main()
     for(i=0; i<tailley; i++)
         for(j=0; j<taillex; j++)
             map[i][j]=1;
-    map[0][0]=2;
-    map[3][4]=3;
+    map[0][0]=3;
+    map[3][4]=2;
     map[3][3]=0;
     ///Creation du double buffer
     tampon=create_bitmap(1280,720);
@@ -65,6 +66,7 @@ int main()
     fond=load_bitmap("Image/Fond.bmp",NULL);
     boutonjouer=load_bitmap("Image/BoutonJouer.bmp",NULL);
     boutonstop=load_bitmap("Image/BoutonStop.bmp",NULL);
+    multibot=load_bitmap("Image/multibot.bmp",NULL);
     souris=create_bitmap(25,31);
     stretch_blit(souristempo,souris,0,0,souristempo->w,souristempo->h,0,0,souris->w,souris->h);
     bot = calloc(5,sizeof(t_personnage)); ///5 bots
@@ -80,32 +82,24 @@ int main()
         bot[k].proc = calloc(1,sizeof(pileAction));
     }
     decoupage(personnage,bot[0].sprite);
-    bot[0].x=0;
-    bot[0].y=0;
-    bot[0].actuelsprite=8;
-    i=8;
-    bot[0].dirx=0;
-    bot[0].compteur=0;
-    bot[0].cpt=0;
-    bot[0].cptProc=0;
-    bot[0].diry=0;
-    bot[0].direction=DOWN;
-    bot[0].isox=toisox(bot[0].x,bot[0].y);
-    bot[0].isoy=toisoy(bot[0].x,bot[0].y);
-    bot[0].dirisox=toisox(bot[0].dirx,bot[0].diry);
-    bot[0].dirisoy=toisoy(bot[0].dirx,bot[0].diry);
+    initbot(bot);
     while (!key[KEY_ESC])
     {
-        clear_bitmap(tampon);
         blit(fond,tampon,0,0,0,0,fond->w,fond->h); ///Image en fond
         changelvl(bot,&lvl,map,taillex,tailley,&play,&tempoaction); ///Verifie si le niveau est terminee
+        //draw_sprite(tampon,multibot,110,5);
+        rectfill(tampon,105,5,175,75,makecol(255,0,0));
+        rectfill(tampon,185,5,255,75,makecol(255,0,0));
+        rectfill(tampon,105,5,175,75,makecol(255,0,0));
+        rectfill(tampon,105,5,175,75,makecol(255,0,0));
+        rectfill(tampon,105,5,175,75,makecol(255,0,0));
         MapCreation(map,taillex,tailley,decalx,decaly,tampon,sol,tolight,light);
         bouton(tampon,boutonjouer,boutonstop,&play,&tempobouton); ///Gestion des boutons pour jouer et mettre en pause
         if(bot[0].isox != bot[0].dirisox && bot[0].isoy != bot[0].dirisoy)
             deplacement(bot,vitesse); ///Modification des coordonnes de deplacement
-        else if(play == 1)
+        else if(play)
         {
-            if(tempoaction < 1) //bot[0].compteur <= tailleliste(bot[0].themain)+ &&
+            if(tempoaction < 1 )
             {
                 readPile(bot,0,map,5,5,&tempoaction ); ///Lit la pile d'action
                 bot[0].compteur++;///On incremente le compteur du nombre d'action
@@ -117,7 +111,7 @@ int main()
         tempoaction--;
         affsprite(bot,tampon,decalx,decaly); ///Affichage sprite
         mainproc(&boolmain, tampon,main,proc);
-        if(boolmain == 0)  ///Fenetre du main ouverte
+        if(!boolmain)  ///Fenetre du main ouverte
         {
             suppPile(bot[0].themain,&cliquedrag, &tempodelete);
             showPile(bot[0].themain,tampon,actionforward,actionlight,rotateleft,rotateright,actionproc);
@@ -129,7 +123,6 @@ int main()
             suppPile(bot[0].proc,&cliquedrag, &tempodelete);
             showPile(bot[0].proc,tampon,actionforward,actionlight,rotateleft,rotateright,actionproc);
             clique(bot[0].proc,action,&boolclique);
-
         }
         draganddrop(bot,&boolmain,tampon,actionforward,actionlight,rotateleft,rotateright,actionproc,&mem,action,&cliquedrag);
         draw_sprite(tampon,souris,mouse_x,mouse_y); ///Affichage de la souris

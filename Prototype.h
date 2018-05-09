@@ -31,6 +31,7 @@ typedef struct
 
 typedef struct perso
 {
+    int active;
     int x; ///Position en 2D
     int y;
     int isox; ///Position actuel en 2D isometrique
