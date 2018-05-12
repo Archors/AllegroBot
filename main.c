@@ -8,6 +8,7 @@ int main()
     int cliquedrag=0;
     int mem=0;
     int lvl=1;
+    int cim;
     int boolclique=0;
     int boolmain=0;
     int play=0; ///Booleen de clique sur le bouton de compilation
@@ -35,19 +36,15 @@ int main()
     BITMAP *souris;
     BITMAP *boutonjouer;
     BITMAP *boutonstop;
-    BITMAP *multibot;
+    BITMAP *boutondelfile;
+    BITMAP *menufond;
+    BITMAP *menulevel;
     int decalx=300, decaly=150;
     t_personnage *bot;
     int **map;
     map=malloc(tailley*sizeof(int*));
     for(i=0; i<tailley; i++)
         map[i]=malloc(taillex*sizeof(int));
-    for(i=0; i<tailley; i++)
-        for(j=0; j<taillex; j++)
-            map[i][j]=1;
-    map[0][0]=3;
-    map[3][4]=2;
-    map[3][3]=0;
     ///Creation du double buffer
     tampon=create_bitmap(1280,720);
     ///Chargement des images necessaires au jeu
@@ -66,7 +63,9 @@ int main()
     fond=load_bitmap("Image/Fond.bmp",NULL);
     boutonjouer=load_bitmap("Image/BoutonJouer.bmp",NULL);
     boutonstop=load_bitmap("Image/BoutonStop.bmp",NULL);
-    multibot=load_bitmap("Image/multibot.bmp",NULL);
+    boutondelfile=load_bitmap("Image/Deletefile.bmp",NULL);
+    menufond=load_bitmap("Image/MenuFond.bmp",NULL);
+    menulevel=load_bitmap("Image/MenuLevel.bmp",NULL);
     souris=create_bitmap(25,31);
     stretch_blit(souristempo,souris,0,0,souristempo->w,souristempo->h,0,0,souris->w,souris->h);
     bot = calloc(5,sizeof(t_personnage)); ///5 bots
@@ -82,24 +81,40 @@ int main()
         bot[k].proc = calloc(1,sizeof(pileAction));
     }
     decoupage(personnage,bot[0].sprite);
-    initbot(bot);
+    /*while (!key[KEY_ESC])
+    {
+        draw_sprite(tampon,menufond,0,0);
+        draw_sprite(tampon,menulevel,0,0);
+        rect(tampon,540,200,740,270,makecol(255,0,0));
+        rect(tampon,540,300,740,370,makecol(255,0,0));
+        rect(tampon,540,405,740,475,makecol(255,0,0));
+        rect(tampon,540,510,740,580,makecol(255,0,0));
+        rect(tampon,540,610,740,680,makecol(255,0,0));
+        if ( mouse_x>=540 && mouse_y>=200 && mouse_x<=740 && mouse_y <=270)
+        {
+            for(i=541; i<740; i++)
+                for(j=201; j<270; j++)
+                    putpixel(tampon,i,j,makecol(255-getr(getpixel(tampon,i,j)),255-getg(getpixel(tampon,i,j)),255-getb(getpixel(tampon,i,j))));
+        }
+        draw_sprite(tampon,souris,mouse_x,mouse_y); ///Affichage de la souris
+        blit(tampon,screen,0,0,0,0,1280,720);
+    }*/
+    lvl1(bot,map);
+    bot[0].isox=toisox(bot[0].dirx,bot[0].diry);
+    bot[0].isoy=toisoy(bot[0].dirx,bot[0].diry);
+    bot[0].dirisox=toisox(bot[0].dirx,bot[0].diry);
+    bot[0].dirisoy=toisoy(bot[0].dirx,bot[0].diry);
     while (!key[KEY_ESC])
     {
         blit(fond,tampon,0,0,0,0,fond->w,fond->h); ///Image en fond
         changelvl(bot,&lvl,map,taillex,tailley,&play,&tempoaction); ///Verifie si le niveau est terminee
-        //draw_sprite(tampon,multibot,110,5);
-        rectfill(tampon,105,5,175,75,makecol(255,0,0));
-        rectfill(tampon,185,5,255,75,makecol(255,0,0));
-        rectfill(tampon,105,5,175,75,makecol(255,0,0));
-        rectfill(tampon,105,5,175,75,makecol(255,0,0));
-        rectfill(tampon,105,5,175,75,makecol(255,0,0));
         MapCreation(map,taillex,tailley,decalx,decaly,tampon,sol,tolight,light);
-        bouton(tampon,boutonjouer,boutonstop,&play,&tempobouton); ///Gestion des boutons pour jouer et mettre en pause
+        bouton(bot,tampon,boutonjouer,boutonstop,boutondelfile,&play,&tempobouton,map,&lvl); ///Gestion des boutons pour jouer et mettre en pause
         if(bot[0].isox != bot[0].dirisox && bot[0].isoy != bot[0].dirisoy)
             deplacement(bot,vitesse); ///Modification des coordonnes de deplacement
         else if(play)
         {
-            if(tempoaction < 1 )
+            if(tempoaction < 1 && tailleliste(bot[0].themain) > 0)
             {
                 readPile(bot,0,map,5,5,&tempoaction ); ///Lit la pile d'action
                 bot[0].compteur++;///On incremente le compteur du nombre d'action

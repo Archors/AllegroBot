@@ -1,4 +1,5 @@
 #include "Prototype.h"
+#include "gestionPile.h"
 
 ///Recois un tableau et affiche ce dernier
 void MapCreation(int **tab, int taillex, int tailley,int decalx, int decaly,BITMAP *tampon, BITMAP *sol, BITMAP *tolight,BITMAP *light)
@@ -67,8 +68,9 @@ void deplacement(t_personnage *bot, int vitesse)
     }
 }
 
-void bouton(BITMAP* tampon, BITMAP* jouer, BITMAP* stop, int *play, int *tempo)
+void bouton(t_personnage* bot, BITMAP* tampon, BITMAP* jouer, BITMAP* stop,BITMAP* delpile, int *play, int *tempo,int **map,int *lvl)
 {
+    int i=0;
     if(tempo > 0)
         (*tempo)--;
     if(*play == 0)
@@ -88,6 +90,27 @@ void bouton(BITMAP* tampon, BITMAP* jouer, BITMAP* stop, int *play, int *tempo)
             *tempo=13;
         }
     }
+    draw_sprite(tampon,delpile,920,20);
+    if(mouse_b&1 && mouse_x > 920 && mouse_y > 20 && mouse_x < 920 + delpile->w && mouse_y < 20 + delpile->h)
+        for(i=0; i<5; i++)
+        {
+            listfree(bot[i].themain);
+            listfree(bot[i].proc);
+            resetbot(bot);
+            switch(*lvl)
+            {
+            case 1:
+                lvl1(bot,map);
+                break;
+            case 2:
+                lvl2(bot,map);
+                break;
+            case 3:
+                lvl3(bot,map);
+                break;
+            }
+            *play=0;
+        }
 }
 
 void affsprite(t_personnage* bot,BITMAP* tampon,int decalx, int decaly)

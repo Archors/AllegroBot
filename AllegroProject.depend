@@ -26,10 +26,11 @@
 	"Prototype.h"
 	"gestionPile.h"
 
-1525674263 source:c:\users\antoine\desktop\gitproject\projetallegro\affichage.c
+1526127925 source:c:\users\antoine\desktop\gitproject\projetallegro\affichage.c
 	"Prototype.h"
+	"gestionPile.h"
 
-1525680401 c:\users\antoine\desktop\gitproject\projetallegro\prototype.h
+1526128125 c:\users\antoine\desktop\gitproject\projetallegro\prototype.h
 	<stdio.h>
 	<stdlib.h>
 	<allegro.h>
@@ -42,19 +43,19 @@
 
 1525674263 c:\users\antoine\desktop\gitproject\projetallegro\gestionpile.h
 
-1525872183 source:c:\users\antoine\desktop\gitproject\projetallegro\gestionpile.c
+1526127641 source:c:\users\antoine\desktop\gitproject\projetallegro\gestionpile.c
 	"Prototype.h"
 	"gestionPile.h"
 
-1525680401 source:c:\users\antoine\desktop\gitproject\projetallegro\initfree.c
+1526073390 source:c:\users\antoine\desktop\gitproject\projetallegro\initfree.c
 	"Prototype.h"
 	"gestionPile.h"
 
-1525872042 source:c:\users\antoine\desktop\gitproject\projetallegro\main.c
+1526150461 source:c:\users\antoine\desktop\gitproject\projetallegro\main.c
 	"Prototype.h"
 	"gestionPile.h"
 
-1525674263 source:c:\users\antoine\desktop\gitproject\projetallegro\victoire.c
+1526128269 source:c:\users\antoine\desktop\gitproject\projetallegro\victoire.c
 	"Prototype.h"
 	"gestionPile.h"
 

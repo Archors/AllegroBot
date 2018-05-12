@@ -61,11 +61,17 @@ void draganddrop(t_personnage* bot,int* boolmain, BITMAP* tampon, BITMAP* forwar
 int toisox(int x, int y);
 int toisoy(int x, int y);
 void addIn(pileAction * pile, int index, int type);
-void bouton(BITMAP* tampon, BITMAP* jouer, BITMAP* stop, int *play, int *tempo);
+void bouton(t_personnage* bot, BITMAP* tampon, BITMAP* jouer, BITMAP* stop,BITMAP* delpile, int *play, int *tempo,int **map,int *lvl);
 void drag(pileAction* pile, int *cliquedrag,int *mem);
 void affsprite(t_personnage* bot,BITMAP* tampon,int decalx, int decaly);
 void clique(pileAction *pile, int action[5],int *clique);
 void changelvl(t_personnage *bot,int* lvl, int** map,int taillex, int tailley, int *play, int *tempo);
 void mainproc(int *booleen,BITMAP* tampon, BITMAP *main, BITMAP *proc);
+void resetbot(t_personnage* bot);
+void lvl1(t_personnage* bot, int** map);
+void lvl2(t_personnage* bot, int** map);
+void lvl3(t_personnage* bot, int** map);
+void lvl4(t_personnage* bot, int** map);
+void lvl5(t_personnage* bot, int** map);
 
 #endif // PROTOTYPE_H_INCLUDED

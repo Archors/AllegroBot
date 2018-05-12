@@ -4,37 +4,42 @@
 	<ActiveTarget name="Debug" />
 	<File name="Prototype.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="553" topLine="28" />
-		</Cursor>
-	</File>
-	<File name="Affichage.c" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2911" topLine="90" />
-		</Cursor>
-	</File>
-	<File name="dragdrop.c" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="323" topLine="86" />
-		</Cursor>
-	</File>
-	<File name="gestionPile.c" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="987" topLine="313" />
+			<Cursor1 position="1768" topLine="44" />
 		</Cursor>
 	</File>
 	<File name="gestionPile.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="185" topLine="0" />
+			<Cursor1 position="30" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="gestionPile.c" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3670" topLine="42" />
 		</Cursor>
 	</File>
 	<File name="main.c" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="3576" topLine="89" />
+			<Cursor1 position="2636" topLine="73" />
+		</Cursor>
+	</File>
+	<File name="victoire.c" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="757" topLine="12" />
 		</Cursor>
 	</File>
 	<File name="InitFree.c" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1012" topLine="36" />
+			<Cursor1 position="773" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="dragdrop.c" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="323" topLine="71" />
+		</Cursor>
+	</File>
+	<File name="Affichage.c" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3513" topLine="122" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>
