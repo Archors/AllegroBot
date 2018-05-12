@@ -15,7 +15,7 @@ int main()
     int tempobouton=0; ///Temporisation sur le bouton
     int tempodelete=0; ///Temporisation sur l
     int tempoaction=0;
-    int i=0,j=0,k=0;
+    int i=0,j=0,k=0,l=0;
     int taillex=5, tailley=5;
     int action[5]= {1,2,3,4,5};
     ///Declaration de BITMAP servant a charger les images
@@ -80,7 +80,8 @@ int main()
         bot[k].themain = calloc(1,sizeof(pileAction));
         bot[k].proc = calloc(1,sizeof(pileAction));
     }
-    decoupage(personnage,bot[0].sprite);
+    for(k=0; k<5; k++)
+        decoupage(personnage,bot[k].sprite);
     /*while (!key[KEY_ESC])
     {
         draw_sprite(tampon,menufond,0,0);
@@ -100,29 +101,38 @@ int main()
         blit(tampon,screen,0,0,0,0,1280,720);
     }*/
     lvl1(bot,map);
+    printf("%d",bot[1].active);
     bot[0].isox=toisox(bot[0].dirx,bot[0].diry);
     bot[0].isoy=toisoy(bot[0].dirx,bot[0].diry);
     bot[0].dirisox=toisox(bot[0].dirx,bot[0].diry);
     bot[0].dirisoy=toisoy(bot[0].dirx,bot[0].diry);
+    bot[1].isox=toisox(bot[1].dirx,bot[1].diry);
+    bot[1].isoy=toisoy(bot[1].dirx,bot[1].diry);
+    bot[1].dirisox=toisox(bot[1].dirx,bot[1].diry);
+    bot[1].dirisoy=toisoy(bot[1].dirx,bot[1].diry);
     while (!key[KEY_ESC])
     {
         blit(fond,tampon,0,0,0,0,fond->w,fond->h); ///Image en fond
         changelvl(bot,&lvl,map,taillex,tailley,&play,&tempoaction); ///Verifie si le niveau est terminee
         MapCreation(map,taillex,tailley,decalx,decaly,tampon,sol,tolight,light);
         bouton(bot,tampon,boutonjouer,boutonstop,boutondelfile,&play,&tempobouton,map,&lvl); ///Gestion des boutons pour jouer et mettre en pause
-        if(bot[0].isox != bot[0].dirisox && bot[0].isoy != bot[0].dirisoy)
-            deplacement(bot,vitesse); ///Modification des coordonnes de deplacement
-        else if(play)
-        {
-            if(tempoaction < 1 && tailleliste(bot[0].themain) > 0)
-            {
-                readPile(bot,0,map,5,5,&tempoaction ); ///Lit la pile d'action
-                bot[0].compteur++;///On incremente le compteur du nombre d'action
-                ///Transforme les coordonnees cartesiennes en coordonnees isometriques
-                bot[0].dirisox=toisox(bot[0].dirx,bot[0].diry);
-                bot[0].dirisoy=toisoy(bot[0].dirx,bot[0].diry);
+            for(l=0;l<5;l++){
+                if(bot[l].isox != bot[l].dirisox && bot[l].isoy != bot[l].dirisoy){
+                    deplacement(bot,vitesse,l); ///Modification des coordonnes de deplacement
+                    printf("%d",l);
+                }
+                else if(play)
+                {
+                    if(tempoaction < 1 && tailleliste(bot[l].themain) > 0)
+                    {
+                        readPile(bot,l,map,5,5,&tempoaction ); ///Lit la pile d'action
+                        bot[l].compteur++;///On incremente le compteur du nombre d'action
+                        ///Transforme les coordonnees cartesiennes en coordonnees isometriques
+                        bot[l].dirisox=toisox(bot[l].dirx,bot[l].diry);
+                        bot[l].dirisoy=toisoy(bot[l].dirx,bot[l].diry);
+                    }
+                }
             }
-        }
         tempoaction--;
         affsprite(bot,tampon,decalx,decaly); ///Affichage sprite
         mainproc(&boolmain, tampon,main,proc);

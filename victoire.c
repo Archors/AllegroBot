@@ -15,7 +15,7 @@ void changelvl(t_personnage *bot,int* lvl, int** map,int taillex, int tailley, i
 {
     int i=0;
     if(finlvl(map,taillex,tailley))
-    {
+    {printf("yo");
         *play=0;
         *tempo=0;
         (*lvl)++;
@@ -30,6 +30,7 @@ void changelvl(t_personnage *bot,int* lvl, int** map,int taillex, int tailley, i
         resetbot(bot);
         listfree(bot[i].themain);
         listfree(bot[i].proc);
+        printf("%d",*lvl);
     }
 }
 
@@ -50,11 +51,12 @@ void lvl1(t_personnage* bot, int** map)
     bot[0].diry=0;
     bot[0].active=1;
     bot[0].direction=RIGHT;
-    bot[1].x=5;
-    bot[1].y=0;
-    bot[1].dirx=5;
+    bot[1].x=4;
+    bot[1].y=1;
+    bot[1].dirx=0;
     bot[1].diry=0;
-    bot[1].active=0;
+    bot[1].active=1;
+    bot[1].direction=RIGHT;
     bot[2].x=0;
     bot[2].y=5;
     bot[2].dirx=0;
@@ -74,11 +76,12 @@ void lvl2(t_personnage* bot, int** map)
     bot[0].diry=0;
     bot[0].active=1;
     bot[0].direction=RIGHT;
-    bot[1].x=5;
-    bot[1].y=0;
-    bot[1].dirx=5;
-    bot[1].diry=0;
-    bot[1].active=0;
+    bot[1].x=4;
+    bot[1].y=1;
+    bot[1].dirx=4;
+    bot[1].diry=1;
+    bot[1].active=1;
+    bot[1].direction=RIGHT;
     bot[2].x=0;
     bot[2].y=5;
     bot[2].dirx=0;

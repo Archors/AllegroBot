@@ -56,9 +56,9 @@ int toisoy(int x, int y)
     return((x*74+y*74)/2);
 }
 
-void deplacement(t_personnage *bot, int vitesse)
+void deplacement(t_personnage *bot, int vitesse, int numero)
 {
-    int i=0;
+    int i=numero;printf("%d",numero);
     bot[i].isox += (bot[i].dirisox - bot[i].isox) * vitesse / (sqrt((bot[i].isox - bot[i].dirisox)*(bot[i].isox - bot[i].dirisox) + (bot[i].isoy - bot[i].dirisoy)*(bot[i].isoy - bot[i].dirisoy)));
     bot[i].isoy += (bot[i].dirisoy - bot[i].isoy) * vitesse / (sqrt((bot[i].isox - bot[i].dirisox)*(bot[i].isox - bot[i].dirisox) + (bot[i].isoy - bot[i].dirisoy)*(bot[i].isoy - bot[i].dirisoy)));
     if(bot[i].isox < 10+bot[i].dirisox && bot[i].isoy < 10+bot[i].dirisoy  && bot[i].isox > bot[i].dirisox-10 && bot[i].isoy > bot[i].dirisoy-10)
@@ -116,29 +116,33 @@ void bouton(t_personnage* bot, BITMAP* tampon, BITMAP* jouer, BITMAP* stop,BITMA
 void affsprite(t_personnage* bot,BITMAP* tampon,int decalx, int decaly)
 {
     int i=0;
-    //for(i=0; i<5; i++)
-    switch (bot[i].direction)
-    {
-    case UP:
-        draw_sprite(tampon, bot[i].sprite[UP][bot[i].actuelsprite], bot[i].isox+decalx+35,bot[0].isoy+decaly-10);
-        break;
-    case DOWN:
-        draw_sprite(tampon, bot[i].sprite[DOWN][bot[i].actuelsprite], bot[i].isox+decalx+35,bot[0].isoy+decaly-10);
-        break;
-    case LEFT:
-        draw_sprite(tampon, bot[i].sprite[LEFT][bot[i].actuelsprite], bot[i].isox+decalx+35,bot[0].isoy+decaly-10);
-        break;
-    case RIGHT:
-        draw_sprite(tampon, bot[i].sprite[RIGHT][bot[i].actuelsprite], bot[i].isox+decalx+35,bot[0].isoy+decaly-10);
-        break;
-    }
-    if(bot[i].isox == bot[i].dirisox && bot[i].isoy == bot[i].dirisoy)
-        bot[i].actuelsprite=8;
-    else
-    {
-        bot[i].actuelsprite--;
-        if(bot[i].actuelsprite < 0)
-            bot[i].actuelsprite = 8;
+    for(i=0; i<5; i++){
+        if(bot[i].active){
+            switch (bot[i].direction)
+            {
+            case UP:
+                draw_sprite(tampon, bot[i].sprite[UP][bot[i].actuelsprite], bot[i].isox+decalx+35,bot[i].isoy+decaly-10);
+                break;
+            case DOWN:
+                draw_sprite(tampon, bot[i].sprite[DOWN][bot[i].actuelsprite], bot[i].isox+decalx+35,bot[i].isoy+decaly-10);
+                break;
+            case LEFT:
+                draw_sprite(tampon, bot[i].sprite[LEFT][bot[i].actuelsprite], bot[i].isox+decalx+35,bot[i].isoy+decaly-10);
+                break;
+            case RIGHT:
+                draw_sprite(tampon, bot[i].sprite[RIGHT][bot[i].actuelsprite], bot[i].isox+decalx+35,bot[i].isoy+decaly-10);
+                break;
+            }
+            if(bot[i].isox == bot[i].dirisox && bot[i].isoy == bot[i].dirisoy)
+                bot[i].actuelsprite=8;
+            else
+            {
+                bot[i].actuelsprite--;
+                if(bot[i].actuelsprite < 0)
+                    bot[i].actuelsprite = 8;
+            }
+        }
+
     }
 }
 

@@ -49,7 +49,7 @@ void readPile(t_personnage* bot, int numero, int **niv, int tailleX, int tailleY
     int end =0;
     if(isProcActive[numero]==0)
     {
-        t_action * cour= (bot[numero].themain)->first;
+        t_action * cour= (bot[0].themain)->first;
         while(cpt!=0)
         {
             if(cour->suiv!=NULL)
@@ -126,7 +126,7 @@ void readPile(t_personnage* bot, int numero, int **niv, int tailleX, int tailleY
                 isProcActive[numero]=1;
                 break;
             }
-            bot[0].cpt++;
+            bot[numero].cpt++;
         }
     }
     else
@@ -136,7 +136,7 @@ void readPile(t_personnage* bot, int numero, int **niv, int tailleX, int tailleY
 
 int readProc(t_personnage* bot, int numero, int **niv, int tailleX, int tailleY)
 {
-    t_action * cour = (bot[numero].proc)->first;
+    t_action * cour = (bot[0].proc)->first;
     if(cour==NULL)
         return 0;
     int cpt = bot[numero].cptProc;
