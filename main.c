@@ -135,7 +135,6 @@ int main()
         while (!key[KEY_ESC] && jeu==1)
         {
             menulvl(tampon,menufond,menulevel,souris,&lvl,&choixlvl,bot,map);
-            printf("%d",bot[0].dirx);
             if(choixlvl !=0)
             {
                 blit(fond,tampon,0,0,0,0,fond->w,fond->h); ///Image en fond
@@ -146,9 +145,13 @@ int main()
                 if(mouse_b&1 && mouse_x > 10 && mouse_y > 10 && mouse_x < 85 && mouse_y < 95)
                     choixlvl=0;
                 for(l=0; l<5; l++)
+                {
                     if(bot[l].isox != bot[l].dirisox && bot[l].isoy != bot[l].dirisoy)
+                    {
                         deplacement(bot,vitesse,l); ///Modification des coordonnes de deplacement
+                    }
                     else if(play)
+                    {
                         if(tempoaction < 1 && tailleliste(bot[l].themain) > 0)
                         {
                             readPile(bot,map,5,5,&tempoaction ); ///Lit la pile d'action
@@ -156,6 +159,8 @@ int main()
                             ///Transforme les coordonnees cartesiennes en coordonnees isometriques
                             toiso(bot);
                         }
+                    }
+                }
                 tempoaction--;
                 affsprite(bot,tampon,decalx,decaly); ///Affichage sprite
                 mainproc(&boolmain, tampon,main,proc);

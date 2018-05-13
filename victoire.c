@@ -16,6 +16,7 @@ void changelvl(t_personnage *bot,int* lvl, int** map,int taillex, int tailley, i
     int i=0;
     if(finlvl(map,taillex,tailley)==1)
     {
+        printf("wesh");
         resetbot(bot);
         listfree(bot[i].themain);
         listfree(bot[i].proc);
@@ -84,6 +85,11 @@ void lvl1(t_personnage* bot, int** map)
     map[4][0]=2;
     map[0][4]=2;
     map[2][3]=2;
+    for(i=0;i<5;i++){
+    bot[i].isox=toisox(bot[i].dirx,bot[i].diry);
+        bot[i].isoy=toisoy(bot[i].dirx,bot[i].diry);
+        bot[i].dirisox=toisox(bot[i].dirx,bot[i].diry);
+        bot[i].dirisoy=toisoy(bot[i].dirx,bot[i].diry);}
 }
 
 void lvl2(t_personnage* bot, int** map)
@@ -137,6 +143,11 @@ void lvl2(t_personnage* bot, int** map)
     map[3][4]=0;
     map[3][1]=0;
     map[4][1]=2;
+    for(i=0;i<5;i++){
+    bot[i].isox=toisox(bot[i].dirx,bot[i].diry);
+        bot[i].isoy=toisoy(bot[i].dirx,bot[i].diry);
+        bot[i].dirisox=toisox(bot[i].dirx,bot[i].diry);
+        bot[i].dirisoy=toisoy(bot[i].dirx,bot[i].diry);}
 }
 
 void lvl3(t_personnage* bot, int** map)
@@ -182,6 +193,11 @@ void lvl3(t_personnage* bot, int** map)
         map[2][i]=3;
     }
     map[2][4]=0;
+    for(i=0;i<5;i++){
+    bot[i].isox=toisox(bot[i].dirx,bot[i].diry);
+        bot[i].isoy=toisoy(bot[i].dirx,bot[i].diry);
+        bot[i].dirisox=toisox(bot[i].dirx,bot[i].diry);
+        bot[i].dirisoy=toisoy(bot[i].dirx,bot[i].diry);}
 }
 
 void lvl4(t_personnage* bot, int** map)
@@ -233,6 +249,11 @@ void lvl4(t_personnage* bot, int** map)
     map[0][0]=2;
     map[2][2]=3;
     map[3][2]=3;
+    for(i=0;i<5;i++){
+    bot[i].isox=toisox(bot[i].dirx,bot[i].diry);
+        bot[i].isoy=toisoy(bot[i].dirx,bot[i].diry);
+        bot[i].dirisox=toisox(bot[i].dirx,bot[i].diry);
+        bot[i].dirisoy=toisoy(bot[i].dirx,bot[i].diry);}
 
 }
 
@@ -291,6 +312,11 @@ void lvl5(t_personnage* bot, int** map)
     map[4][0]=3;
     map[1][3]=3;
     map[3][3]=3;
+    for(i=0;i<5;i++){
+    bot[i].isox=toisox(bot[i].dirx,bot[i].diry);
+        bot[i].isoy=toisoy(bot[i].dirx,bot[i].diry);
+        bot[i].dirisox=toisox(bot[i].dirx,bot[i].diry);
+        bot[i].dirisoy=toisoy(bot[i].dirx,bot[i].diry);}
 
 }
 

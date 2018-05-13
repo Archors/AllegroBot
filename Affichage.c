@@ -250,8 +250,7 @@ void menulvl(BITMAP* tampon, BITMAP* menufond, BITMAP* menulevel, BITMAP* souris
         }
         draw_sprite(tampon,souris,mouse_x,mouse_y); ///Affichage de la souris
         blit(tampon,screen,0,0,0,0,1280,720);
-    }
-    resetbot(bot);
+        resetbot(bot);
     listfree(bot[0].themain);
     listfree(bot[0].proc);
     switch (*lvl)
@@ -271,5 +270,6 @@ void menulvl(BITMAP* tampon, BITMAP* menufond, BITMAP* menulevel, BITMAP* souris
     case 5:
         lvl5(bot,map);
         break;
+    }
     }
 }
