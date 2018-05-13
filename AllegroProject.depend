@@ -92,3 +92,36 @@
 	"Prototype.h"
 	"gestionPile.h"
 
+1526238130 source:d:\bureau\gitproject\projetallegro\affichage.c
+	"Prototype.h"
+	"gestionPile.h"
+
+1526238199 d:\bureau\gitproject\projetallegro\prototype.h
+	<stdio.h>
+	<stdlib.h>
+	<allegro.h>
+	<time.h>
+	<math.h>
+
+1526236641 d:\bureau\gitproject\projetallegro\gestionpile.h
+
+1526236641 source:d:\bureau\gitproject\projetallegro\dragdrop.c
+	"Prototype.h"
+	"gestionPile.h"
+
+1526236641 source:d:\bureau\gitproject\projetallegro\gestionpile.c
+	"Prototype.h"
+	"gestionPile.h"
+
+1526236641 source:d:\bureau\gitproject\projetallegro\initfree.c
+	"Prototype.h"
+	"gestionPile.h"
+
+1526237575 source:d:\bureau\gitproject\projetallegro\victoire.c
+	"Prototype.h"
+	"gestionPile.h"
+
+1526238183 source:d:\bureau\gitproject\projetallegro\main.c
+	"Prototype.h"
+	"gestionPile.h"
+

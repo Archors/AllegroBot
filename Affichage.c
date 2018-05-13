@@ -109,6 +109,12 @@ void bouton(t_personnage* bot, BITMAP* tampon, BITMAP* jouer, BITMAP* stop,BITMA
             case 3:
                 lvl3(bot,map);
                 break;
+            case 4:
+                lvl4(bot,map);
+                break;
+            case 5:
+                lvl5(bot,map);
+                break;
             }
             *play=0;
         }
@@ -188,18 +194,22 @@ void menulvl(BITMAP* tampon, BITMAP* menufond, BITMAP* menulevel, BITMAP* souris
         rect(tampon,540,610,740,680,makecol(255,0,0));
         if ( mouse_x>=540 && mouse_y>=200 && mouse_x<=740 && mouse_y <=270)
         {
-            if(mouse_b&1){
-            *lvl=1;
-            *choix=1;}
+            if(mouse_b&1)
+            {
+                *lvl=1;
+                *choix=1;
+            }
             for(i=541; i<740; i++)
                 for(j=201; j<270; j++)
                     putpixel(tampon,i,j,makecol(255-getr(getpixel(tampon,i,j)),255-getg(getpixel(tampon,i,j)),255-getb(getpixel(tampon,i,j))));
         }
         if ( mouse_x>=540 && mouse_y>=300 && mouse_x<=740 && mouse_y <=370)
         {
-            if(mouse_b&1){
-            *lvl=2;
-            *choix=1;}
+            if(mouse_b&1)
+            {
+                *lvl=2;
+                *choix=1;
+            }
             for(i=541; i<740; i++)
                 for(j=301; j<370; j++)
                     putpixel(tampon,i,j,makecol(255-getr(getpixel(tampon,i,j)),255-getg(getpixel(tampon,i,j)),255-getb(getpixel(tampon,i,j))));
@@ -207,65 +217,59 @@ void menulvl(BITMAP* tampon, BITMAP* menufond, BITMAP* menulevel, BITMAP* souris
         if ( mouse_x>=540 && mouse_y>=405 && mouse_x<=740 && mouse_y <=475)
         {
 
-            if(mouse_b&1){
-            *lvl=3;
-            *choix=1;}
+            if(mouse_b&1)
+            {
+                *lvl=3;
+                *choix=1;
+            }
             for(i=541; i<740; i++)
                 for(j=406; j<475; j++)
                     putpixel(tampon,i,j,makecol(255-getr(getpixel(tampon,i,j)),255-getg(getpixel(tampon,i,j)),255-getb(getpixel(tampon,i,j))));
         }
         if ( mouse_x>=540 && mouse_y>=510 && mouse_x<=740 && mouse_y <=580)
         {
-            if(mouse_b&1){
-            *lvl=4;
-            *choix=1;}
+            if(mouse_b&1)
+            {
+                *lvl=4;
+                *choix=1;
+            }
             for(i=541; i<740; i++)
                 for(j=511; j<580; j++)
                     putpixel(tampon,i,j,makecol(255-getr(getpixel(tampon,i,j)),255-getg(getpixel(tampon,i,j)),255-getb(getpixel(tampon,i,j))));
         }
         if ( mouse_x>=540 && mouse_y>=610 && mouse_x<=740 && mouse_y <=680)
         {
-            if(mouse_b&1){
-            *lvl=5;
-            *choix=1;}
+            if(mouse_b&1)
+            {
+                *lvl=5;
+                *choix=1;
+            }
             for(i=541; i<740; i++)
                 for(j=611; j<680; j++)
                     putpixel(tampon,i,j,makecol(255-getr(getpixel(tampon,i,j)),255-getg(getpixel(tampon,i,j)),255-getb(getpixel(tampon,i,j))));
         }
         draw_sprite(tampon,souris,mouse_x,mouse_y); ///Affichage de la souris
         blit(tampon,screen,0,0,0,0,1280,720);
-        switch (*lvl)
+    }
+    resetbot(bot);
+    listfree(bot[0].themain);
+    listfree(bot[0].proc);
+    switch (*lvl)
     {
     case 1:
-        resetbot(bot);
-        listfree(bot[0].themain);
-        listfree(bot[0].proc);
         lvl1(bot,map);
         break;
     case 2:
-        resetbot(bot);
-        listfree(bot[0].themain);
-        listfree(bot[0].proc);
         lvl2(bot,map);
         break;
     case 3:
-        resetbot(bot);
-        listfree(bot[0].themain);
-        listfree(bot[0].proc);
         lvl3(bot,map);
         break;
     case 4:
-        resetbot(bot);
-        listfree(bot[0].themain);
-        listfree(bot[0].proc);
         lvl4(bot,map);
         break;
     case 5:
-        resetbot(bot);
-        listfree(bot[0].themain);
-        listfree(bot[0].proc);
-        //lvl5(bot,map);
+        lvl5(bot,map);
         break;
-    }
     }
 }

@@ -57,6 +57,7 @@ void decoupage(BITMAP *base, BITMAP ***decoupe);
 void liberer(int **map, t_personnage *bot, int taillex);
 void initalleg();
 void deplacement(t_personnage *bot, int vitesse, int numero);
+void menulvl(BITMAP* tampon, BITMAP* menufond, BITMAP* menulevel, BITMAP* souris, int *lvl, int *choix,t_personnage* bot, int** map);
 void draganddrop(t_personnage* bot,int* boolmain, BITMAP* tampon, BITMAP* forward, BITMAP* light, BITMAP* left, BITMAP* right,BITMAP* spring, int *mem, int action[5], int *cliquedrag);
 int toisox(int x, int y);
 int toisoy(int x, int y);

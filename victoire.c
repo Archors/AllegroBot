@@ -16,6 +16,9 @@ void changelvl(t_personnage *bot,int* lvl, int** map,int taillex, int tailley, i
     int i=0;
     if(finlvl(map,taillex,tailley)==1)
     {
+        resetbot(bot);
+        listfree(bot[i].themain);
+        listfree(bot[i].proc);
         *play=0;
         *tempo=0;
         (*lvl)++;
@@ -29,9 +32,6 @@ void changelvl(t_personnage *bot,int* lvl, int** map,int taillex, int tailley, i
             lvl4(bot,map);
         if(*lvl == 5)
             lvl5(bot,map);
-        resetbot(bot);
-        listfree(bot[i].themain);
-        listfree(bot[i].proc);
     }
 }
 

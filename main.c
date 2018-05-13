@@ -124,25 +124,8 @@ int main()
         blit(tampon,screen,0,0,0,0,1280,720);
         if(mouse_b&1 && mouse_x > 540 && mouse_x < 740 && mouse_y > 240 && mouse_y < 360)
         {
-<<<<<<< HEAD
-            if(bot[l].isox != bot[l].dirisox && bot[l].isoy != bot[l].dirisoy)
-            {
-                deplacement(bot,vitesse,l); ///Modification des coordonnes de deplacement
-            }
-            else if(play)
-            {
-                if(tempoaction < 1 && tailleliste(bot[l].themain) > 0)
-                {
-                    readPile(bot,map,5,5,&tempoaction ); ///Lit la pile d'action
-                    bot[l].compteur++;///On incremente le compteur du nombre d'action
-                    ///Transforme les coordonnees cartesiennes en coordonnees isometriques
-                    toiso(bot);
-                }
-            }
-=======
             jeu=1;
             rest(200);
->>>>>>> a75aa4d8fb83cdc3aadb90f52faa154abbf986ac
         }
         if(mouse_b&1 && mouse_x > 540 && mouse_x < 740 && mouse_y > 450 && mouse_y < 570)
         {
@@ -152,6 +135,7 @@ int main()
         while (!key[KEY_ESC] && jeu==1)
         {
             menulvl(tampon,menufond,menulevel,souris,&lvl,&choixlvl,bot,map);
+            printf("%d",bot[0].dirx);
             if(choixlvl !=0)
             {
                 blit(fond,tampon,0,0,0,0,fond->w,fond->h); ///Image en fond
@@ -162,13 +146,9 @@ int main()
                 if(mouse_b&1 && mouse_x > 10 && mouse_y > 10 && mouse_x < 85 && mouse_y < 95)
                     choixlvl=0;
                 for(l=0; l<5; l++)
-                {
                     if(bot[l].isox != bot[l].dirisox && bot[l].isoy != bot[l].dirisoy)
-                    {
                         deplacement(bot,vitesse,l); ///Modification des coordonnes de deplacement
-                    }
                     else if(play)
-                    {
                         if(tempoaction < 1 && tailleliste(bot[l].themain) > 0)
                         {
                             readPile(bot,map,5,5,&tempoaction ); ///Lit la pile d'action
@@ -176,8 +156,6 @@ int main()
                             ///Transforme les coordonnees cartesiennes en coordonnees isometriques
                             toiso(bot);
                         }
-                    }
-                }
                 tempoaction--;
                 affsprite(bot,tampon,decalx,decaly); ///Affichage sprite
                 mainproc(&boolmain, tampon,main,proc);
