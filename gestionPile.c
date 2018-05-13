@@ -46,7 +46,7 @@ void readPile(t_personnage* bot, int **niv, int tailleX, int tailleY, int* tempo
 {
     static int isProcActive[5]= {0};
     int numero=0;
-    int cpt=bot[numero].cpt;
+    int cpt=bot[0].cpt;
     int end =0;
     if(isProcActive[numero]==0)
     {
@@ -68,7 +68,7 @@ void readPile(t_personnage* bot, int **niv, int tailleX, int tailleY, int* tempo
         {
             numero=0;
             for(numero=0; numero<5; numero++)
-            {
+            {if(bot[numero].active){
                 switch(cour->type)
                 {
                 case AVANCER :
@@ -129,13 +129,17 @@ void readPile(t_personnage* bot, int **niv, int tailleX, int tailleY, int* tempo
                 case PROC :
                     isProcActive[numero]=1;
                     break;
-                }
+                }}
             }
             bot[0].cpt++;
         }
     }
-    else
+    else{
         isProcActive[0]=readProc(bot,niv,tailleX,tailleY);
+        if(isProcActive[0]==0){
+            bot[0].cptProc=0;
+        }
+    }
     *tempo=30;
 }
 
@@ -145,7 +149,7 @@ int readProc(t_personnage* bot, int **niv, int tailleX, int tailleY)
     int numero=0;
     if(cour==NULL)
         return 0;
-    int cpt = bot[numero].cptProc;
+    int cpt = bot[0].cptProc;
     while(cpt!=0)
     {
         if(cour->suiv!=NULL)
@@ -157,7 +161,7 @@ int readProc(t_personnage* bot, int **niv, int tailleX, int tailleY)
             break;
     }
     for(numero=0; numero<5; numero++)
-    {
+    {if(bot[numero].active){
         switch(cour->type)
         {
         case AVANCER :
@@ -216,10 +220,11 @@ int readProc(t_personnage* bot, int **niv, int tailleX, int tailleY)
                 bot[numero].direction = UP;
             break;
         case PROC :
-            bot[0].cptProc=0;
+            bot[numero].cptProc=0;
             return 1;
             break;
         }
+    }
     }
     bot[0].cptProc++;
     if(cour->suiv==NULL)

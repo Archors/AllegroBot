@@ -59,36 +59,36 @@
 	"Prototype.h"
 	"gestionPile.h"
 
-1526161976 source:c:\projetallegro\projetallegro\affichage.c
+1526209217 source:c:\projetallegro\projetallegro\affichage.c
 	"Prototype.h"
 	"gestionPile.h"
 
-1526160855 c:\projetallegro\projetallegro\prototype.h
+1526209217 c:\projetallegro\projetallegro\prototype.h
 	<stdio.h>
 	<stdlib.h>
 	<allegro.h>
 	<time.h>
 	<math.h>
 
-1526159771 source:c:\projetallegro\projetallegro\dragdrop.c
+1526209217 source:c:\projetallegro\projetallegro\dragdrop.c
 	"Prototype.h"
 	"gestionPile.h"
 
-1526159771 c:\projetallegro\projetallegro\gestionpile.h
+1526209217 c:\projetallegro\projetallegro\gestionpile.h
 
-1526163883 source:c:\projetallegro\projetallegro\gestionpile.c
+1526231439 source:c:\projetallegro\projetallegro\gestionpile.c
 	"Prototype.h"
 	"gestionPile.h"
 
-1526162783 source:c:\projetallegro\projetallegro\initfree.c
+1526228409 source:c:\projetallegro\projetallegro\initfree.c
 	"Prototype.h"
 	"gestionPile.h"
 
-1526164794 source:c:\projetallegro\projetallegro\main.c
+1526235178 source:c:\projetallegro\projetallegro\main.c
 	"Prototype.h"
 	"gestionPile.h"
 
-1526163647 source:c:\projetallegro\projetallegro\victoire.c
+1526234409 source:c:\projetallegro\projetallegro\victoire.c
 	"Prototype.h"
 	"gestionPile.h"
 

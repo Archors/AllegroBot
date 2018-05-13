@@ -134,7 +134,7 @@ int main()
                 if(tempoaction < 1 && tailleliste(bot[l].themain) > 0)
                 {
                     readPile(bot,map,5,5,&tempoaction ); ///Lit la pile d'action
-                    bot[0].compteur++;///On incremente le compteur du nombre d'action
+                    bot[l].compteur++;///On incremente le compteur du nombre d'action
                     ///Transforme les coordonnees cartesiennes en coordonnees isometriques
                     toiso(bot);
                 }

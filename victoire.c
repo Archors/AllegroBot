@@ -27,6 +27,8 @@ void changelvl(t_personnage *bot,int* lvl, int** map,int taillex, int tailley, i
             lvl3(bot,map);
         if(*lvl == 4)
             lvl4(bot,map);
+        if(*lvl == 5)
+            lvl5(bot,map);
         resetbot(bot);
         listfree(bot[i].themain);
         listfree(bot[i].proc);
@@ -44,11 +46,16 @@ void listfree(pileAction* list)
 void lvl1(t_personnage* bot, int** map)
 {
     int i=0,j=0;
-    bot[0].x=0;
+    bot[0].x=1;
     bot[0].y=0;
-    bot[0].dirx=0;
+    bot[0].dirx=1;
     bot[0].diry=0;
-    bot[0].direction=RIGHT;
+    bot[0].direction=UP;
+    bot[0].active=1;
+    bot[1].active=1;
+    bot[2].active=1;
+    bot[3].active=1;
+    bot[4].active=1;
     bot[1].x=4;
     bot[1].y=1;
     bot[1].dirx=4;
@@ -56,23 +63,27 @@ void lvl1(t_personnage* bot, int** map)
     bot[1].direction=RIGHT;
     bot[2].x=0;
     bot[2].y=3;
-    bot[2].dirx=1;
-    bot[2].diry=1;
-    bot[2].direction=UP;
-    bot[3].x=1;
-    bot[3].y=3;
-    bot[3].dirx=1;
-    bot[3].diry=3;
+    bot[2].dirx=0;
+    bot[2].diry=3;
+    bot[2].direction=LEFT;
+    bot[3].x=3;
+    bot[3].y=4;
+    bot[3].dirx=3;
+    bot[3].diry=4;
     bot[3].direction=DOWN;
-    bot[4].x=3;
+    bot[4].x=0;
     bot[4].y=2;
-    bot[4].dirx=3;
+    bot[4].dirx=0;
     bot[4].diry=2;
-    bot[4].direction=RIGHT;
+    bot[4].direction=UP;
     for(i=0; i<5; i++)
         for(j=0; j<5; j++)
             map[i][j]=1;
-    map[3][3]=2;
+    map[4][4]=2;
+    map[0][0]=2;
+    map[4][0]=2;
+    map[0][4]=2;
+    map[2][3]=2;
 }
 
 void lvl2(t_personnage* bot, int** map)
@@ -83,42 +94,161 @@ void lvl2(t_personnage* bot, int** map)
     bot[0].dirx=0;
     bot[0].diry=0;
     bot[0].direction=RIGHT;
+    //bot[0].cpt=0;
+    bot[0].active=1;
+    bot[1].active=1;
+    bot[2].active=0;
+    bot[3].active=0;
+    bot[4].active=0;
     bot[1].x=4;
-    bot[1].y=1;
+    bot[1].y=4;
     bot[1].dirx=4;
-    bot[1].diry=1;
+    bot[1].diry=4;
     bot[1].direction=LEFT;
     bot[2].x=0;
     bot[2].y=4;
-    bot[2].dirx=0;
+    bot[2].dirx=600000;
     bot[2].diry=4;
+    bot[2].active=0;
     bot[2].direction=UP;
     bot[3].x=4;
     bot[3].y=4;
-    bot[3].dirx=4;
+    bot[3].dirx=600000;
     bot[3].diry=4;
+    bot[3].active=0;
     bot[3].direction=RIGHT;
     bot[4].x=3;
     bot[4].y=3;
-    bot[4].dirx=3;
+    bot[4].dirx=60000;
     bot[4].diry=3;
+    bot[4].active=0;
     bot[4].direction=LEFT;
     for(i=0; i<5; i++)
         for(j=0; j<5; j++)
             map[i][j]=1;
-    map[0][0] = 2;
-    map[3][3] = 2;
-    map[2][2] = 2;
+    map[1][0] = 0;
+    map[1][3] = 0;
+    map[0][3] = 2;
+    map[0][2]=0;
+    map[1][2]=0;
+    map[2][2]=0;
+    map[3][2]=0;
+    map[4][2]=0;
+    map[3][4]=0;
+    map[3][1]=0;
+    map[4][1]=2;
 }
 
 void lvl3(t_personnage* bot, int** map)
 {
     int i=0,j=0;
-    bot[0].x=0;
-    bot[0].y=0;
-    bot[0].dirx=0;
-    bot[0].diry=0;
-    bot[0].direction=RIGHT;
+    bot[0].x=2;
+    bot[0].y=1;
+    bot[0].dirx=2;
+    bot[0].diry=1;
+    bot[0].direction=UP;
+    bot[0].active=1;
+    bot[1].active=1;
+    bot[2].active=0;
+    bot[3].active=0;
+    bot[4].active=0;
+    bot[1].x=2;
+    bot[1].y=3;
+    bot[1].dirx=2;
+    bot[1].diry=3;
+    bot[1].direction=DOWN;
+    bot[2].x=0;
+    bot[2].y=4;
+    bot[2].dirx=6000;
+    bot[2].diry=6000;
+    bot[2].direction=UP;
+    bot[3].x=4;
+    bot[3].y=4;
+    bot[3].dirx=6000;
+    bot[3].diry=6000;
+    bot[3].direction=LEFT;
+    bot[4].x=2;
+    bot[4].y=2;
+    bot[4].dirx=6000;
+    bot[4].diry=2;
+    bot[4].direction=LEFT;
+    for(i=0; i<5; i++)
+        for(j=0; j<5; j++)
+            map[i][j]=2;
+    for(i=0; i<5; i++)
+    {
+        map[i][4]=0;
+        map[i][0]=0;
+        map[2][i]=3;
+    }
+    map[2][4]=0;
+}
+
+void lvl4(t_personnage* bot, int** map)
+{
+    int i=0,j=0;
+    bot[0].x=4;
+    bot[0].y=4;
+    bot[0].dirx=4;
+    bot[0].diry=4;
+    bot[0].direction=LEFT;
+    bot[0].active=1;
+    bot[1].active=1;
+    bot[2].active=0;
+    bot[3].active=0;
+    bot[4].active=0;
+    bot[1].x=4;
+    bot[1].y=0;
+    bot[1].dirx=4;
+    bot[1].diry=0;
+    bot[1].direction=DOWN;
+    bot[2].x=0;
+    bot[2].y=2;
+    bot[2].dirx=6000;
+    bot[2].diry=2;
+    bot[2].direction=RIGHT;
+    bot[3].x=0;
+    bot[3].y=3;
+    bot[3].dirx=6000;
+    bot[3].diry=3;
+    bot[3].direction=RIGHT;
+    bot[4].x=0;
+    bot[4].y=4;
+    bot[4].dirx=6000;
+    bot[4].diry=4;
+    bot[4].direction=RIGHT;
+    for(i=0; i<5; i++)
+        for(j=0; j<5; j++)
+            map[i][j]=2;
+    map[0][2]=0;
+    map[0][3]=0;
+    map[1][2]=0;
+    map[4][2]=0;
+    map[0][1]=0;
+    map[2][0]=0;
+    map[3][0]=0;
+    map[4][2]=0;
+    map[2][4]=0;
+    map[3][4]=0;
+    map[0][0]=2;
+    map[2][2]=3;
+    map[3][2]=3;
+
+}
+
+void lvl5(t_personnage* bot, int** map)
+{
+    int i=0,j=0;
+    bot[0].x=4;
+    bot[0].y=4;
+    bot[0].dirx=4;
+    bot[0].diry=4;
+    bot[0].direction=LEFT;
+    bot[0].active=1;
+    bot[1].active=1;
+    bot[2].active=1;
+    bot[3].active=1;
+    bot[4].active=0;
     bot[1].x=4;
     bot[1].y=0;
     bot[1].dirx=4;
@@ -129,65 +259,41 @@ void lvl3(t_personnage* bot, int** map)
     bot[2].dirx=0;
     bot[2].diry=4;
     bot[2].direction=UP;
-    bot[3].x=4;
-    bot[3].y=4;
-    bot[3].dirx=4;
-    bot[3].diry=4;
-    bot[3].direction=LEFT;
-    bot[4].x=2;
-    bot[4].y=2;
-    bot[4].dirx=2;
-    bot[4].diry=2;
-    bot[4].direction=LEFT;
-    for(i=0; i<5; i++)
-        for(j=0; j<5; j++)
-            map[i][j]=1;
-    for(i=0; i<5; i++)
-    {
-        map[i][0]=2;
-        map[0][i]=2;
-        map[4][i]=2;
-        map[i][4]=2;
-    }
-
-    map[0][2]=0;
-    map[2][0]=0;
-    map[4][2]=0;
-    map[2][4]=0;
-}
-
-void lvl4(t_personnage* bot, int** map)
-{
-    int i=0,j=0;
-    bot[0].x=0;
-    bot[0].y=0;
-    bot[0].dirx=0;
-    bot[0].diry=0;
-    bot[0].direction=RIGHT;
-    bot[1].x=0;
-    bot[1].y=1;
-    bot[1].dirx=0;
-    bot[1].diry=1;
-    bot[1].direction=RIGHT;
-    bot[2].x=0;
-    bot[2].y=2;
-    bot[2].dirx=0;
-    bot[2].diry=2;
-    bot[2].direction=RIGHT;
     bot[3].x=0;
-    bot[3].y=3;
+    bot[3].y=0;
     bot[3].dirx=0;
-    bot[3].diry=3;
+    bot[3].diry=0;
     bot[3].direction=RIGHT;
     bot[4].x=0;
     bot[4].y=4;
-    bot[4].dirx=0;
+    bot[4].dirx=6000;
     bot[4].diry=4;
     bot[4].direction=RIGHT;
     for(i=0; i<5; i++)
         for(j=0; j<5; j++)
             map[i][j]=2;
+    map[0][2]=0;
+    map[0][3]=0;
+    map[1][2]=0;
+    map[4][2]=0;
+    map[0][1]=0;
+    map[2][0]=0;
+    map[3][0]=0;
+    map[4][2]=0;
+    map[2][4]=0;
+    map[3][4]=0;
+    map[0][0]=2;
+    map[2][2]=0;
+    map[2][1]=0;
+    map[2][3]=0;
+    map[3][2]=0;
+    map[0][0]=3;
+    map[4][0]=3;
+    map[1][3]=3;
+    map[3][3]=3;
+
 }
+
 
 void resetbot(t_personnage* bot)
 {
