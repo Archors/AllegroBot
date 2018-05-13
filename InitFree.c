@@ -24,7 +24,7 @@ void initalleg()
     install_mouse();
     install_keyboard();
     set_color_depth(desktop_color_depth());
-    if (set_gfx_mode(GFX_AUTODETECT_WINDOWED,1280,720,0,0)!=0)
+    if (set_gfx_mode(GFX_AUTODETECT,1280,720,0,0)!=0)
     {
         allegro_message("prb gfx mode");
         allegro_exit();

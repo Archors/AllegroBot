@@ -73,5 +73,6 @@ void lvl2(t_personnage* bot, int** map);
 void lvl3(t_personnage* bot, int** map);
 void lvl4(t_personnage* bot, int** map);
 void lvl5(t_personnage* bot, int** map);
+void toiso(t_personnage* bot);
 
 #endif // PROTOTYPE_H_INCLUDED

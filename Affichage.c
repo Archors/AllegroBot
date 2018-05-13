@@ -58,10 +58,11 @@ int toisoy(int x, int y)
 
 void deplacement(t_personnage *bot, int vitesse, int numero)
 {
-    int i=numero;printf("%d",numero);
+    int i=numero;
+
     bot[i].isox += (bot[i].dirisox - bot[i].isox) * vitesse / (sqrt((bot[i].isox - bot[i].dirisox)*(bot[i].isox - bot[i].dirisox) + (bot[i].isoy - bot[i].dirisoy)*(bot[i].isoy - bot[i].dirisoy)));
     bot[i].isoy += (bot[i].dirisoy - bot[i].isoy) * vitesse / (sqrt((bot[i].isox - bot[i].dirisox)*(bot[i].isox - bot[i].dirisox) + (bot[i].isoy - bot[i].dirisoy)*(bot[i].isoy - bot[i].dirisoy)));
-    if(bot[i].isox < 10+bot[i].dirisox && bot[i].isoy < 10+bot[i].dirisoy  && bot[i].isox > bot[i].dirisox-10 && bot[i].isoy > bot[i].dirisoy-10)
+    if(bot[i].isox < 15+bot[i].dirisox && bot[i].isoy < 15+bot[i].dirisoy  && bot[i].isox > bot[i].dirisox-15 && bot[i].isoy > bot[i].dirisoy-15)
     {
         bot[i].isox=bot[i].dirisox;
         bot[i].isoy=bot[i].dirisoy;
@@ -116,31 +117,30 @@ void bouton(t_personnage* bot, BITMAP* tampon, BITMAP* jouer, BITMAP* stop,BITMA
 void affsprite(t_personnage* bot,BITMAP* tampon,int decalx, int decaly)
 {
     int i=0;
-    for(i=0; i<5; i++){
-        if(bot[i].active){
-            switch (bot[i].direction)
-            {
-            case UP:
-                draw_sprite(tampon, bot[i].sprite[UP][bot[i].actuelsprite], bot[i].isox+decalx+35,bot[i].isoy+decaly-10);
-                break;
-            case DOWN:
-                draw_sprite(tampon, bot[i].sprite[DOWN][bot[i].actuelsprite], bot[i].isox+decalx+35,bot[i].isoy+decaly-10);
-                break;
-            case LEFT:
-                draw_sprite(tampon, bot[i].sprite[LEFT][bot[i].actuelsprite], bot[i].isox+decalx+35,bot[i].isoy+decaly-10);
-                break;
-            case RIGHT:
-                draw_sprite(tampon, bot[i].sprite[RIGHT][bot[i].actuelsprite], bot[i].isox+decalx+35,bot[i].isoy+decaly-10);
-                break;
-            }
-            if(bot[i].isox == bot[i].dirisox && bot[i].isoy == bot[i].dirisoy)
-                bot[i].actuelsprite=8;
-            else
-            {
-                bot[i].actuelsprite--;
-                if(bot[i].actuelsprite < 0)
-                    bot[i].actuelsprite = 8;
-            }
+    for(i=0; i<5; i++)
+    {
+        switch (bot[i].direction)
+        {
+        case UP:
+            draw_sprite(tampon, bot[i].sprite[UP][bot[i].actuelsprite], bot[i].isox+decalx+35,bot[i].isoy+decaly-10);
+            break;
+        case DOWN:
+            draw_sprite(tampon, bot[i].sprite[DOWN][bot[i].actuelsprite], bot[i].isox+decalx+35,bot[i].isoy+decaly-10);
+            break;
+        case LEFT:
+            draw_sprite(tampon, bot[i].sprite[LEFT][bot[i].actuelsprite], bot[i].isox+decalx+35,bot[i].isoy+decaly-10);
+            break;
+        case RIGHT:
+            draw_sprite(tampon, bot[i].sprite[RIGHT][bot[i].actuelsprite], bot[i].isox+decalx+35,bot[i].isoy+decaly-10);
+            break;
+        }
+        if(bot[i].isox == bot[i].dirisox && bot[i].isoy == bot[i].dirisoy)
+            bot[i].actuelsprite=8;
+        else
+        {
+            bot[i].actuelsprite--;
+            if(bot[i].actuelsprite < 0)
+                bot[i].actuelsprite = 8;
         }
 
     }
@@ -161,5 +161,15 @@ void mainproc(int *booleen,BITMAP* tampon, BITMAP *main, BITMAP *proc)
     {
         draw_sprite(tampon,proc,800,100); ///Affichage de la fenetre de la proc
         draw_sprite(tampon,main,800,100); ///Affichage de la fenetre du main
+    }
+}
+
+void toiso(t_personnage* bot)
+{
+    int i=0;
+    for(i=0; i<5; i++)
+    {
+        bot[i].dirisox=toisox(bot[i].dirx,bot[i].diry);
+        bot[i].dirisoy=toisoy(bot[i].dirx,bot[i].diry);
     }
 }

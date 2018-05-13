@@ -8,7 +8,6 @@ int main()
     int cliquedrag=0;
     int mem=0;
     int lvl=1;
-    int cim;
     int boolclique=0;
     int boolmain=0;
     int play=0; ///Booleen de clique sur le bouton de compilation
@@ -22,6 +21,10 @@ int main()
     BITMAP *tampon;
     BITMAP *fond;
     BITMAP *personnage;
+    BITMAP *personnage2;
+    BITMAP *personnage3;
+    BITMAP *personnage4;
+    BITMAP *personnage5;
     BITMAP *sol;
     BITMAP *tolight;
     BITMAP *light;
@@ -49,6 +52,10 @@ int main()
     tampon=create_bitmap(1280,720);
     ///Chargement des images necessaires au jeu
     personnage=load_bitmap("Image/Spriterobot.bmp",NULL);
+    personnage2=load_bitmap("Image/Spriterobot2.bmp",NULL);
+    personnage3=load_bitmap("Image/Spriterobot3.bmp",NULL);
+    personnage4=load_bitmap("Image/Spriterobot4.bmp",NULL);
+    personnage5=load_bitmap("Image/Spriterobot5.bmp",NULL);
     sol=load_bitmap("Image/Case.bmp",NULL);
     tolight=load_bitmap("Image/Tolight.bmp",NULL);
     light=load_bitmap("Image/Light.bmp",NULL);
@@ -80,8 +87,11 @@ int main()
         bot[k].themain = calloc(1,sizeof(pileAction));
         bot[k].proc = calloc(1,sizeof(pileAction));
     }
-    for(k=0; k<5; k++)
-        decoupage(personnage,bot[k].sprite);
+    decoupage(personnage,bot[0].sprite);
+    decoupage(personnage2,bot[1].sprite);
+    decoupage(personnage3,bot[2].sprite);
+    decoupage(personnage4,bot[3].sprite);
+    decoupage(personnage5,bot[4].sprite);
     /*while (!key[KEY_ESC])
     {
         draw_sprite(tampon,menufond,0,0);
@@ -101,38 +111,35 @@ int main()
         blit(tampon,screen,0,0,0,0,1280,720);
     }*/
     lvl1(bot,map);
-    printf("%d",bot[1].active);
-    bot[0].isox=toisox(bot[0].dirx,bot[0].diry);
-    bot[0].isoy=toisoy(bot[0].dirx,bot[0].diry);
-    bot[0].dirisox=toisox(bot[0].dirx,bot[0].diry);
-    bot[0].dirisoy=toisoy(bot[0].dirx,bot[0].diry);
-    bot[1].isox=toisox(bot[1].dirx,bot[1].diry);
-    bot[1].isoy=toisoy(bot[1].dirx,bot[1].diry);
-    bot[1].dirisox=toisox(bot[1].dirx,bot[1].diry);
-    bot[1].dirisoy=toisoy(bot[1].dirx,bot[1].diry);
+    for(i=0; i<5; i++)
+    {
+        bot[i].isox=toisox(bot[i].dirx,bot[i].diry);
+        bot[i].isoy=toisoy(bot[i].dirx,bot[i].diry);
+    }
+    toiso(bot);
     while (!key[KEY_ESC])
     {
         blit(fond,tampon,0,0,0,0,fond->w,fond->h); ///Image en fond
         changelvl(bot,&lvl,map,taillex,tailley,&play,&tempoaction); ///Verifie si le niveau est terminee
         MapCreation(map,taillex,tailley,decalx,decaly,tampon,sol,tolight,light);
         bouton(bot,tampon,boutonjouer,boutonstop,boutondelfile,&play,&tempobouton,map,&lvl); ///Gestion des boutons pour jouer et mettre en pause
-            for(l=0;l<5;l++){
-                if(bot[l].isox != bot[l].dirisox && bot[l].isoy != bot[l].dirisoy){
-                    deplacement(bot,vitesse,l); ///Modification des coordonnes de deplacement
-                    printf("%d",l);
-                }
-                else if(play)
+        for(l=0; l<5; l++)
+        {
+            if(bot[l].isox != bot[l].dirisox && bot[l].isoy != bot[l].dirisoy)
+            {
+                deplacement(bot,vitesse,l); ///Modification des coordonnes de deplacement
+            }
+            else if(play)
+            {
+                if(tempoaction < 1 && tailleliste(bot[l].themain) > 0)
                 {
-                    if(tempoaction < 1 && tailleliste(bot[l].themain) > 0)
-                    {
-                        readPile(bot,l,map,5,5,&tempoaction ); ///Lit la pile d'action
-                        bot[l].compteur++;///On incremente le compteur du nombre d'action
-                        ///Transforme les coordonnees cartesiennes en coordonnees isometriques
-                        bot[l].dirisox=toisox(bot[l].dirx,bot[l].diry);
-                        bot[l].dirisoy=toisoy(bot[l].dirx,bot[l].diry);
-                    }
+                    readPile(bot,map,5,5,&tempoaction ); ///Lit la pile d'action
+                    bot[0].compteur++;///On incremente le compteur du nombre d'action
+                    ///Transforme les coordonnees cartesiennes en coordonnees isometriques
+                    toiso(bot);
                 }
             }
+        }
         tempoaction--;
         affsprite(bot,tampon,decalx,decaly); ///Affichage sprite
         mainproc(&boolmain, tampon,main,proc);
